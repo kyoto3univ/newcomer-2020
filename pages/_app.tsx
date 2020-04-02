@@ -10,6 +10,7 @@ export default ({ Component, pageProps }: AppProps) => {
           body {
             margin: 0;
             padding: 0;
+            color: #212529;
           }
         `}
       </style>
