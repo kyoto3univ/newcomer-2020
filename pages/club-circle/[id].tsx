@@ -8,6 +8,7 @@ import { ClubImages } from '../../components/ClubImages';
 import { ClubTopImage } from '../../components/ClubTopImage';
 import { Container } from '../../components/Container';
 import { Dl } from '../../components/DescriptionList';
+import { Ogp } from '../../components/Ogp';
 import { PreWrapP } from '../../components/PreWrapP';
 import { SectionTitle } from '../../components/SectionTitle';
 import { ExtractPromise } from '../../utils/return-type';
@@ -15,6 +16,7 @@ import { ExtractPromise } from '../../utils/return-type';
 const ClubLink = styled.a`
   display: block;
   margin-bottom: 5px;
+  word-break: break-all;
 `;
 type Props = {
   club: ExtractPromise<ReturnType<typeof fetchClub>>;
@@ -25,6 +27,14 @@ export default ({ club }: Props) => {
       <Head>
         <title>{club.name} - 部活動・サークル紹介</title>
       </Head>
+      <Ogp
+        title={`${club.name} - 部活動・サークル紹介`}
+        description={club.shortDescription}
+        largeImage={
+          club.largeImage ? `${club.largeImage}?h=480&fit=fill` : null
+        }
+        smallImage={club.image ? `${club.image}?h=120&w=120&fit=fill` : null}
+      />
       <Container>
         <SectionTitle>{club.name}</SectionTitle>
         <ClubTopImage
@@ -50,6 +60,18 @@ export default ({ club }: Props) => {
         </Dl>
         <PreWrapP>{club.description}</PreWrapP>
         <Dl>
+          {club.files.length > 0 && (
+            <>
+              <dt>ファイル</dt>
+              <dd>
+                {club.files.map((file) => (
+                  <ClubLink href={file.url} target='_blank' key={file.url}>
+                    {file.title}
+                  </ClubLink>
+                ))}
+              </dd>
+            </>
+          )}
           {club.urls.length > 0 && (
             <>
               <dt>URL</dt>

@@ -3,9 +3,10 @@ import Head from 'next/head';
 import React from 'react';
 import Select, { OptionsType, ValueType } from 'react-select';
 import styled from 'styled-components';
-import { fetchClubList } from '../../api/contentful';
+import { fetchCategories, fetchClubList } from '../../api/contentful';
 import { ClubCard } from '../../components/ClubCard';
 import { Container } from '../../components/Container';
+import { Ogp } from '../../components/Ogp';
 import { SectionTitle } from '../../components/SectionTitle';
 import { ExtractPromise } from '../../utils/return-type';
 
@@ -80,6 +81,10 @@ export default ({ clubs, categories }: Props) => {
       <Head>
         <title>クラブ・サークル紹介</title>
       </Head>
+      <Ogp
+        title='クラブ・サークル紹介'
+        description='京都工芸繊維大学のサークル・部活動や他大学のインカレサークルを紹介します'
+      />
       <Container>
         <SectionTitle>クラブ・サークル紹介</SectionTitle>
         <FilterContainer>
@@ -98,15 +103,20 @@ export default ({ clubs, categories }: Props) => {
             </ClearLink>
           )}
         </FilterContainer>
-        {filteredClubs.map((club) => (
-          <ClubCard
-            key={club.id}
-            title={club.name}
-            description={club.shortDescription}
-            id={club.id}
-            image={club.image}
-          />
-        ))}
+        {filteredClubs.length > 0 ? (
+          filteredClubs.map((club) => (
+            <ClubCard
+              key={club.id}
+              title={club.name}
+              description={club.shortDescription}
+              id={club.id}
+              image={club.image}
+              categories={club.categories}
+            />
+          ))
+        ) : (
+          <p>該当する部活動・サークルはありません</p>
+        )}
       </Container>
     </>
   );
@@ -114,16 +124,12 @@ export default ({ clubs, categories }: Props) => {
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const clubs = await fetchClubList();
+  const categories = await fetchCategories();
 
   return {
     props: {
       clubs,
-      categories: Object.keys(
-        clubs.reduce<Record<string, number>>((obj, { categories }) => {
-          categories.forEach((category) => (obj[category] = 1));
-          return obj;
-        }, {}),
-      ),
+      categories: categories.map(({ name }) => name),
     },
   };
 };

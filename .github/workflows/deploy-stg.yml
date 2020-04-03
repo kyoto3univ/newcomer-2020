@@ -6,6 +6,8 @@ on:
       - production
   repository_dispatch:
     types: [deploy_stg]
+  schedule:
+    - cron:  '0 */6 * * *'
 
 jobs:
   deploy:
@@ -48,3 +50,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out
           publish_branch: stg-pages
+          force_orphan: true

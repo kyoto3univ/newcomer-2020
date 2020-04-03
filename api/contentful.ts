@@ -9,6 +9,7 @@ const client = createClient({
 
 type Category = {
   name: string;
+  priority: number;
 };
 
 type ClubInfo = {
@@ -49,6 +50,19 @@ export const fetchClubList = async () => {
     image: item.fields.image?.fields.file.url || null,
     imageMeta: item.fields.image?.fields.file.details.image || null,
     shortDescription: item.fields?.shortDescription || '',
+  }));
+};
+
+export const fetchCategories = async () => {
+  const result = await client.getEntries<Category>({
+    content_type: 'Category',
+    limit: 500,
+    order: 'sys.createdAt',
+  });
+
+  return result.items.map((item) => ({
+    id: item.sys.id,
+    name: item.fields.name,
   }));
 };
 
