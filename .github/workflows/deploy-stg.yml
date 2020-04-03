@@ -37,6 +37,7 @@ jobs:
       - run: yarn run build
       - run: yarn run export
 
+      - run: "echo \"User-agent: *\nDisallow: /\" > ./out/robots.txt"
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
