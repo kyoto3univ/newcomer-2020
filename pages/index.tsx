@@ -26,7 +26,7 @@ export default () => {
           />*/}
           <ContentCard
             title='部活・サークル紹介'
-            description='ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ'
+            description='京都工芸繊維大学のサークル・部活動や他大学のインカレサークルを紹介します'
             link='/club-circle'
           />
         </ContentCardContainer>
