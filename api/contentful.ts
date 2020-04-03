@@ -38,6 +38,26 @@ export const fetchClubList = async () => {
     name: item.fields.name,
     categories: item.fields.category?.map(({ fields }) => fields.name) || [],
     image: item.fields.image?.fields.file.url || null,
+    imageMeta: item.fields.image?.fields.file.details.image || null,
     shortDescription: item.fields?.shortDescription || '',
   }));
+};
+
+export const fetchClub = async (id: string) => {
+  const result = await client.getEntry<ClubInfo>(id);
+
+  return {
+    id: result.sys.id,
+    name: result.fields.name,
+    categories: result.fields.category?.map(({ fields }) => fields.name) || [],
+    image: result.fields.image?.fields.file.url || null,
+    imageMeta: result.fields.image?.fields.file.details.image || null,
+    shortDescription: result.fields?.shortDescription || '',
+    description: result.fields.description || '',
+    largeImage: result.fields.largeImage?.fields.file.url || null,
+    largeImageMeta: result.fields.largeImage?.fields.file.details.image || null,
+    youtubeId: result.fields.movieUrl
+      ? result.fields.movieUrl.replace(/.+\?v=/, '').replace(/youtu\.be\//, '')
+      : null,
+  };
 };
