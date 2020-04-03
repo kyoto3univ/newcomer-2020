@@ -56,7 +56,11 @@ export default ({ clubs, categories }: Props) => {
 
   const handleSelectChange = React.useCallback(
     (options: ValueType<OptionType>) => {
-      if (options) setCategoryFilter([(options as OptionType).value]);
+      // if (options) setCategoryFilter([(options as OptionType).value]);
+      if (options)
+        setCategoryFilter(
+          (options as OptionsType<OptionType>).map(({ value }) => value),
+        );
     },
     [],
   );
@@ -84,7 +88,8 @@ export default ({ clubs, categories }: Props) => {
               options={selectOptions}
               onChange={handleSelectChange}
               value={selectedOptions}
-              placeholder='カテゴリで絞り込み'
+              placeholder='タグで絞り込み'
+              isMulti
             />
           </SelectContainer>
           {selectedOptions.length > 0 && (
