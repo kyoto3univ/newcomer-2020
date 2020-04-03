@@ -59,6 +59,18 @@ export default ({ club }: Props) => {
         </Dl>
         <PreWrapP>{club.description}</PreWrapP>
         <Dl>
+          {club.files.length > 0 && (
+            <>
+              <dt>ファイル</dt>
+              <dd>
+                {club.files.map((file) => (
+                  <ClubLink href={file.url} target='_blank' key={file.url}>
+                    {file.title}
+                  </ClubLink>
+                ))}
+              </dd>
+            </>
+          )}
           {club.urls.length > 0 && (
             <>
               <dt>URL</dt>
