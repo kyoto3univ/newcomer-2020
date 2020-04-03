@@ -32,7 +32,7 @@ const Logo = styled.img`
 const Title = styled.span`
   display: block;
   color: #fff;
-  font-size: 28px;
+  font-size: 22px;
   padding-left: 10px;
   line-height: 60px;
   @media screen and (max-width: 520px) {
