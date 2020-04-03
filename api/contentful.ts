@@ -38,6 +38,7 @@ export const fetchClubList = async () => {
       'fields.shortDescription',
     ].join(','),
     limit: 500,
+    order: 'sys.createdAt',
   });
 
   return result.items.map((item) => ({
