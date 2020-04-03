@@ -73,7 +73,7 @@ export const Header = () => {
         <Link href='/' passHref>
           <HeaderLink>
             <Logo src='/logo.jpg' />
-            <NormalTitle>京都三大学新入生応援サイト</NormalTitle>
+            <NormalTitle>京都工繊新入生応援サイト</NormalTitle>
             <SpTitle>トップ</SpTitle>
           </HeaderLink>
         </Link>

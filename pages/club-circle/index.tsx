@@ -82,7 +82,7 @@ export default ({ clubs, categories }: Props) => {
         <title>クラブ・サークル紹介</title>
       </Head>
       <Ogp
-        title='クラブ・サークル紹介 - 京都三大学新入生応援サイト'
+        title='クラブ・サークル紹介'
         description='京都工芸繊維大学のサークル・部活動や他大学のインカレサークルを紹介します'
       />
       <Container>

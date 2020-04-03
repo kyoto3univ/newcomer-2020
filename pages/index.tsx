@@ -9,10 +9,10 @@ export default () => {
   return (
     <>
       <Head>
-        <title>京都三大学新入生応援サイト</title>
+        <title>京都工繊新入生応援サイト</title>
       </Head>
       <Ogp
-        title='京都三大学新入生応援サイト'
+        title='京都工繊新入生応援サイト'
         description='このサイトでは、COVID-19の影響で新歓や初回授業を受けられなくなった新入生をサポートする情報を配信しています'
       />
       <Container>
