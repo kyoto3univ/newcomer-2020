@@ -12,6 +12,11 @@ export default ({ Component, pageProps }: AppProps) => {
             padding: 0;
             color: #212529;
           }
+
+          a {
+            color: #007bff;
+            text-decoration: none;
+          }
         `}
       </style>
       <Header />
