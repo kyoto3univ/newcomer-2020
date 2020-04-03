@@ -24,6 +24,7 @@ const Hour = styled.span``;
 const Description = styled.p`
   line-height: 1.2em;
   margin: 3px;
+  word-break: break-all;
 `;
 
 export const ClassCard = ({ title, description, link, hour }: Props) => {

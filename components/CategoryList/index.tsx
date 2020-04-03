@@ -15,6 +15,7 @@ const Item = styled.li`
   border-radius: 1em;
   border: 1px solid transparent;
   font-size: 0.9em;
+  word-break: break-all;
 `;
 
 type Props = { data: string[] };

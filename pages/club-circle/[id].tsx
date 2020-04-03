@@ -16,6 +16,7 @@ import { ExtractPromise } from '../../utils/return-type';
 const ClubLink = styled.a`
   display: block;
   margin-bottom: 5px;
+  word-break: break-all;
 `;
 type Props = {
   club: ExtractPromise<ReturnType<typeof fetchClub>>;

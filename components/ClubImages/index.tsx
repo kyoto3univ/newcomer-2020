@@ -10,9 +10,10 @@ const ImageList = styled.div`
   justify-content: center;
   > img {
     margin: 15px;
+    max-width: 90%;
     width: 360px;
     height: 200px;
-    object-fit: cover;
+    object-fit: contain;
     cursor: pointer;
   }
 `;
