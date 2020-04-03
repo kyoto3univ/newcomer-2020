@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import { Container } from '../Container';
 
 const HeaderContainer = styled.header`
+  position: fixed;
+  top: 0%;
+  left: 0;
   margin: 0;
   box-sizing: border-box;
   width: 100%;
@@ -81,6 +84,18 @@ export const Header = () => {
           <SubLink>サークル紹介</SubLink>
         </Link>
       </HeaderInnerContainer>
+      <style jsx global>
+        {`
+          body {
+            margin-top: 75px;
+          }
+          @media screen and (max-width: 520px) {
+            body {
+              margin-top: 65px;
+            }
+          }
+        `}
+      </style>
     </HeaderContainer>
   );
 };
