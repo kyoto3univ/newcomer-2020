@@ -103,7 +103,7 @@ export default ({ clubs, categories }: Props) => {
             key={club.id}
             title={club.name}
             description={club.shortDescription}
-            link={`/club-circle/${club.id}`}
+            id={club.id}
             image={club.image}
           />
         ))}

@@ -3,10 +3,10 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import styled from 'styled-components';
 
 type Props = {
+  id: string;
   title: string;
   description: string;
   image?: string | null;
-  link: string;
 };
 
 const Container = styled.a`
@@ -43,9 +43,13 @@ const Description = styled.p`
   margin: 3px;
 `;
 
-export const ClubCard = ({ title, description, link, image }: Props) => {
+export const ClubCard = ({ title, description, id, image }: Props) => {
   return (
-    <Link href={link} passHref>
+    <Link
+      href={{ pathname: '/club-circle/[id]' }}
+      as={{ pathname: `/club-circle/${id}` }}
+      passHref
+    >
       <Container>
         {image && (
           <LazyLoadImage
