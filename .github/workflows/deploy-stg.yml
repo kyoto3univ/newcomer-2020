@@ -35,7 +35,11 @@ jobs:
 
       - run: yarn install --frozen-lockfile
       - run: yarn run build
+        env:
+          NODE_ENV: production
       - run: yarn run export
+        env:
+          NODE_ENV: production
 
       - run: "echo \"User-agent: *\nDisallow: /\" > ./out/robots.txt"
       - name: Deploy

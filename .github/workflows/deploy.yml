@@ -34,7 +34,11 @@ jobs:
 
       - run: yarn install --frozen-lockfile
       - run: yarn run build
+        env:
+          NODE_ENV: production
       - run: yarn run export
+        env:
+          NODE_ENV: production
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
