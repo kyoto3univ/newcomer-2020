@@ -98,16 +98,20 @@ export default ({ clubs, categories }: Props) => {
             </ClearLink>
           )}
         </FilterContainer>
-        {filteredClubs.map((club) => (
-          <ClubCard
-            key={club.id}
-            title={club.name}
-            description={club.shortDescription}
-            id={club.id}
-            image={club.image}
-            categories={club.categories}
-          />
-        ))}
+        {filteredClubs.length > 0 ? (
+          filteredClubs.map((club) => (
+            <ClubCard
+              key={club.id}
+              title={club.name}
+              description={club.shortDescription}
+              id={club.id}
+              image={club.image}
+              categories={club.categories}
+            />
+          ))
+        ) : (
+          <p>該当する部活動・サークルはありません</p>
+        )}
       </Container>
     </>
   );
