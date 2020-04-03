@@ -1,3 +1,4 @@
+import React from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import YouTube from 'react-youtube';
 import styled from 'styled-components';
@@ -31,10 +32,21 @@ type Props = {
 };
 
 export const ClubTopImage = ({ image, youtube, imageAlt }: Props) => {
+  const ytInitialHeight = React.useMemo(
+    () =>
+      process.browser && document.body.clientWidth < 520
+        ? (document.body.clientWidth / 16) * 9
+        : 360,
+    [],
+  );
   if (youtube) {
     return (
       <Container>
-        <YouTube videoId={youtube} containerClassName='yt' />
+        <YouTube
+          videoId={youtube}
+          containerClassName='yt'
+          opts={{ height: `${ytInitialHeight}` }}
+        />
       </Container>
     );
   }
