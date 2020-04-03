@@ -10,7 +10,7 @@ const HeaderContainer = styled.header`
   height: 60px;
   background: #111;
   @media screen and (max-width: 520px) {
-    height: 40px;
+    height: 50px;
   }
 `;
 
@@ -28,7 +28,7 @@ const Logo = styled.img`
   padding: 10px;
   height: 40px;
   @media screen and (max-width: 520px) {
-    height: 30px;
+    height: 40px;
     padding: 5px;
   }
 `;
@@ -39,8 +39,20 @@ const Title = styled.span`
   font-size: 22px;
   padding-left: 10px;
   line-height: 60px;
+`;
+
+const NormalTitle = styled(Title)`
   @media screen and (max-width: 520px) {
     display: none;
+  }
+`;
+
+const SpTitle = styled(Title)`
+  display: none;
+  font-size: 18px;
+  line-height: 50px;
+  @media screen and (max-width: 520px) {
+    display: inline-block;
   }
 `;
 
@@ -51,7 +63,7 @@ const SubLink = styled.a`
   color: #fff;
 
   @media screen and (max-width: 520px) {
-    line-height: 40px;
+    line-height: 50px;
   }
 `;
 export const Header = () => {
@@ -61,7 +73,8 @@ export const Header = () => {
         <Link href='/' passHref>
           <HeaderLink>
             <Logo src='/logo.jpg' />
-            <Title>京都三大学新入生応援サイト</Title>
+            <NormalTitle>京都三大学新入生応援サイト</NormalTitle>
+            <SpTitle>トップ</SpTitle>
           </HeaderLink>
         </Link>
         <Link href='/club-circle' passHref>
