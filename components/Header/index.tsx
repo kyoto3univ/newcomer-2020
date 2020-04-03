@@ -14,8 +14,12 @@ const HeaderContainer = styled.header`
   }
 `;
 
-const HeaderLink = styled.a`
+const HeaderInnerContainer = styled(Container)`
   display: flex;
+`;
+
+const HeaderLink = styled.a`
+  display: inline-flex;
   text-decoration: none;
 `;
 
@@ -30,27 +34,40 @@ const Logo = styled.img`
 `;
 
 const Title = styled.span`
-  display: block;
+  display: inline-block;
   color: #fff;
   font-size: 22px;
   padding-left: 10px;
   line-height: 60px;
   @media screen and (max-width: 520px) {
-    visibility: hidden;
+    display: none;
   }
 `;
 
+const SubLink = styled.a`
+  margin-left: auto;
+  text-decoration: none;
+  line-height: 60px;
+  color: #fff;
+
+  @media screen and (max-width: 520px) {
+    line-height: 40px;
+  }
+`;
 export const Header = () => {
   return (
     <HeaderContainer>
-      <Container>
+      <HeaderInnerContainer>
         <Link href='/' passHref>
           <HeaderLink>
             <Logo src='/logo.jpg' />
             <Title>京都三大学新入生応援サイト</Title>
           </HeaderLink>
         </Link>
-      </Container>
+        <Link href='/club-circle' passHref>
+          <SubLink>サークル紹介</SubLink>
+        </Link>
+      </HeaderInnerContainer>
     </HeaderContainer>
   );
 };
