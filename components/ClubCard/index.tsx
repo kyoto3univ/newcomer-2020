@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import styled from 'styled-components';
 
 type Props = {
@@ -16,16 +17,16 @@ const Container = styled.a`
   padding: 1em 0;
   display: flex;
   flex-direction: row;
+
+  img {
+    object-fit: cover;
+  }
 `;
 
-const Image = styled.img`
-  object-fit: cover;
-  width: 84px;
-  height: 84px;
-  padding-right: 12px;
+const TextContainer = styled.div`
+  margin-left: 12px;
 `;
 
-const TextContainer = styled.div``;
 const Title = styled.h4`
   margin: 3px;
   font-weight: bold;
@@ -42,7 +43,9 @@ export const ClubCard = ({ title, description, link, image }: Props) => {
   return (
     <Link href={link} passHref>
       <Container>
-        {image && <Image src={image} />}
+        {image && (
+          <LazyLoadImage width={84} height={84} src={image} alt={title} />
+        )}
         <TextContainer>
           <Title>{title}</Title>
           <Description>{description}</Description>
