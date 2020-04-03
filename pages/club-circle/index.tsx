@@ -2,11 +2,26 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import React from 'react';
 import Select, { OptionsType, ValueType } from 'react-select';
+import styled from 'styled-components';
 import { fetchClubList } from '../../api/contentful';
 import { ClubCard } from '../../components/ClubCard';
 import { Container } from '../../components/Container';
 import { SectionTitle } from '../../components/SectionTitle';
 import { ExtractPromise } from '../../utils/return-type';
+
+const FilterContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const SelectContainer = styled.div`
+  width: 100%;
+`;
+
+const ClearLink = styled.a`
+  margin-left: 10px;
+  word-break: keep-all;
+`;
 
 type Props = {
   clubs: ExtractPromise<ReturnType<typeof fetchClubList>>;
@@ -23,7 +38,7 @@ export default ({ clubs, categories }: Props) => {
     if (categoryFilter.length === 0) return clubs;
 
     return clubs.filter((club) =>
-      categoryFilter.some((category) => club.categories.includes(category)),
+      categoryFilter.every((category) => club.categories.includes(category)),
     );
   }, [categoryFilter]);
 
@@ -41,12 +56,19 @@ export default ({ clubs, categories }: Props) => {
 
   const handleSelectChange = React.useCallback(
     (options: ValueType<OptionType>) => {
-      if (options)
-        setCategoryFilter(
-          (options as OptionsType<OptionType>).map((opt) => opt.value),
-        );
+      if (options) setCategoryFilter([(options as OptionType).value]);
     },
     [],
+  );
+
+  const handleClearFilter = React.useCallback(
+    (e: React.SyntheticEvent) => {
+      setCategoryFilter([]);
+      e.preventDefault();
+
+      return false;
+    },
+    [setCategoryFilter],
   );
 
   return (
@@ -56,13 +78,21 @@ export default ({ clubs, categories }: Props) => {
       </Head>
       <Container>
         <SectionTitle>クラブ・サークル紹介</SectionTitle>
-        <Select
-          options={selectOptions}
-          isMulti={true}
-          onChange={handleSelectChange}
-          value={selectedOptions}
-          placeholder='カテゴリで絞り込み'
-        />
+        <FilterContainer>
+          <SelectContainer>
+            <Select
+              options={selectOptions}
+              onChange={handleSelectChange}
+              value={selectedOptions}
+              placeholder='カテゴリで絞り込み'
+            />
+          </SelectContainer>
+          {selectedOptions.length > 0 && (
+            <ClearLink onClick={handleClearFilter} href='#'>
+              絞り込み解除
+            </ClearLink>
+          )}
+        </FilterContainer>
         {filteredClubs.map((club) => (
           <ClubCard
             key={club.id}
