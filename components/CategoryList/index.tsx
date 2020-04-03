@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Container = styled.ul`
   list-style: none;
-  margin: 0.5em;
+  margin: 0;
   padding: 0;
   display: flex;
   flex-direction: row;
@@ -14,6 +14,7 @@ const Item = styled.li`
   background-color: #eee;
   border-radius: 1em;
   border: 1px solid transparent;
+  font-size: 0.9em;
 `;
 
 type Props = { data: string[] };

@@ -1,12 +1,14 @@
 import Link from 'next/link';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import styled from 'styled-components';
+import { CategoryList } from '../CategoryList';
 
 type Props = {
   id: string;
   title: string;
   description: string;
   image?: string | null;
+  categories: string[];
 };
 
 const Container = styled.a`
@@ -43,7 +45,13 @@ const Description = styled.p`
   margin: 3px;
 `;
 
-export const ClubCard = ({ title, description, id, image }: Props) => {
+export const ClubCard = ({
+  title,
+  description,
+  id,
+  image,
+  categories,
+}: Props) => {
   return (
     <Link
       href={{ pathname: '/club-circle/[id]' }}
@@ -62,6 +70,7 @@ export const ClubCard = ({ title, description, id, image }: Props) => {
         <TextContainer>
           <Title>{title}</Title>
           <Description>{description}</Description>
+          <CategoryList data={categories} />
         </TextContainer>
       </Container>
     </Link>

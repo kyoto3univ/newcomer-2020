@@ -105,6 +105,7 @@ export default ({ clubs, categories }: Props) => {
             description={club.shortDescription}
             id={club.id}
             image={club.image}
+            categories={club.categories}
           />
         ))}
       </Container>
