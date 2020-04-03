@@ -2,6 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import styled from 'styled-components';
 import { fetchClub, fetchClubList } from '../../api/contentful';
+import { AutoLink } from '../../components/AutoLink';
 import { CategoryList } from '../../components/CategoryList';
 import { ClubImages } from '../../components/ClubImages';
 import { ClubTopImage } from '../../components/ClubTopImage';
@@ -33,27 +34,28 @@ export default ({ club }: Props) => {
           youtube={club.youtubeId}
         />
         <CategoryList data={club.categories} />
-        <PreWrapP>{club.description}</PreWrapP>
-        <ClubImages images={club.images} />
         <Dl>
-          {club.location && (
+          <dt>活動場所・時間</dt>
+          <dd>{club.locationAndTime}</dd>
+          {club.contactUrl && (
             <>
-              <dt>活動場所</dt>
-              <dd>{club.location}</dd>
+              <dt>連絡先</dt>
+              <dd>
+                <AutoLink url={club.contactUrl} />
+              </dd>
             </>
           )}
-          {club.time && (
-            <>
-              <dt>活動時間</dt>
-              <dd>{club.time}</dd>
-            </>
-          )}
+          <dt>入部方法</dt>
+          <dd>{club.howToJoin}</dd>
+        </Dl>
+        <PreWrapP>{club.description}</PreWrapP>
+        <Dl>
           {club.urls.length > 0 && (
             <>
               <dt>URL</dt>
               <dd>
                 {club.urls.map((link) => (
-                  <ClubLink href={link} target='_blank'>
+                  <ClubLink href={link} target='_blank' key={link}>
                     {link}
                   </ClubLink>
                 ))}
@@ -61,6 +63,7 @@ export default ({ club }: Props) => {
             </>
           )}
         </Dl>
+        <ClubImages images={club.images} />
       </Container>
     </>
   );

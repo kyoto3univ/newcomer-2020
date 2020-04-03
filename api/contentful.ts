@@ -18,8 +18,9 @@ type ClubInfo = {
   shortDescription?: string;
   description: string;
   movieUrl?: string;
-  location?: string;
-  time?: string;
+  locationAndTime: string;
+  contactUrl?: string;
+  howToJoin: string;
   urls?: string[];
   univ: string[];
   files: Asset[];
@@ -66,8 +67,9 @@ export const fetchClub = async (id: string) => {
     youtubeId: result.fields.movieUrl
       ? result.fields.movieUrl.replace(/.+\?v=/, '').replace(/youtu\.be\//, '')
       : null,
-    location: result.fields.location || null,
-    time: result.fields.time || null,
+    locationAndTime: result.fields.locationAndTime,
+    contactUrl: result.fields.contactUrl || null,
+    howToJoin: result.fields.howToJoin,
     urls: result.fields.urls || [],
     files:
       result.fields.files?.map((file) => ({
