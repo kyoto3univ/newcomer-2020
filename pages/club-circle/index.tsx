@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { fetchCategories, fetchClubList } from '../../api/contentful';
 import { ClubCard } from '../../components/ClubCard';
 import { Container } from '../../components/Container';
+import { Ogp } from '../../components/Ogp';
 import { SectionTitle } from '../../components/SectionTitle';
 import { ExtractPromise } from '../../utils/return-type';
 
@@ -80,6 +81,10 @@ export default ({ clubs, categories }: Props) => {
       <Head>
         <title>クラブ・サークル紹介</title>
       </Head>
+      <Ogp
+        title='クラブ・サークル紹介 - 京都三大学新入生応援サイト'
+        description='京都工芸繊維大学のサークル・部活動や他大学のインカレサークルを紹介します'
+      />
       <Container>
         <SectionTitle>クラブ・サークル紹介</SectionTitle>
         <FilterContainer>

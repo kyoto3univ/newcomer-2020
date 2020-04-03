@@ -8,6 +8,7 @@ import { ClubImages } from '../../components/ClubImages';
 import { ClubTopImage } from '../../components/ClubTopImage';
 import { Container } from '../../components/Container';
 import { Dl } from '../../components/DescriptionList';
+import { Ogp } from '../../components/Ogp';
 import { PreWrapP } from '../../components/PreWrapP';
 import { SectionTitle } from '../../components/SectionTitle';
 import { ExtractPromise } from '../../utils/return-type';
@@ -25,6 +26,14 @@ export default ({ club }: Props) => {
       <Head>
         <title>{club.name} - 部活動・サークル紹介</title>
       </Head>
+      <Ogp
+        title={`${club.name} - 部活動・サークル紹介`}
+        description={club.shortDescription}
+        largeImage={
+          club.largeImage ? `${club.largeImage}?h=480&fit=fill` : null
+        }
+        smallImage={club.image ? `${club.image}?h=120&w=120&fit=fill` : null}
+      />
       <Container>
         <SectionTitle>{club.name}</SectionTitle>
         <ClubTopImage

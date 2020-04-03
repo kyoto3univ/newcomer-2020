@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { Container } from '../components/Container';
 import { ContentCard } from '../components/ContentCard';
 import { ContentCardContainer } from '../components/ContentCard/container';
+import { Ogp } from '../components/Ogp';
 import { SectionTitle } from '../components/SectionTitle';
 
 export default () => {
@@ -10,6 +11,10 @@ export default () => {
       <Head>
         <title>京都三大学新入生応援サイト</title>
       </Head>
+      <Ogp
+        title='京都三大学新入生応援サイト'
+        description='このサイトでは、COVID-19の影響で新歓や初回授業を受けられなくなった新入生をサポートする情報を配信しています'
+      />
       <Container>
         <SectionTitle>このサイトについて</SectionTitle>
         <p>
@@ -31,7 +36,6 @@ export default () => {
           />
         </ContentCardContainer>
       </Container>
-      ;
     </>
   );
 };
