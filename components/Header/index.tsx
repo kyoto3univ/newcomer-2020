@@ -6,7 +6,7 @@ import { Container } from '../Container';
 const HeaderContainer = styled.header`
   margin: 0;
   box-sizing: border-box;
-  width: 100vw;
+  width: 100%;
   height: 60px;
   background: #111;
   @media screen and (max-width: 520px) {
