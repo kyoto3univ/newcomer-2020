@@ -3,6 +3,7 @@ import Head from 'next/head';
 import styled from 'styled-components';
 import { fetchClub, fetchClubList } from '../../api/contentful';
 import { CategoryList } from '../../components/CategoryList';
+import { ClubImages } from '../../components/ClubImages';
 import { ClubTopImage } from '../../components/ClubTopImage';
 import { Container } from '../../components/Container';
 import { Dl } from '../../components/DescriptionList';
@@ -33,6 +34,7 @@ export default ({ club }: Props) => {
         />
         <CategoryList data={club.categories} />
         <PreWrapP>{club.description}</PreWrapP>
+        <ClubImages images={club.images} />
         <Dl>
           {club.location && (
             <>

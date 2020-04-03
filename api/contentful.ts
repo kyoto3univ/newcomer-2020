@@ -69,15 +69,17 @@ export const fetchClub = async (id: string) => {
     location: result.fields.location || null,
     time: result.fields.time || null,
     urls: result.fields.urls || [],
-    files: result.fields.files.map((file) => ({
-      title: file.fields.title,
-      url: file.fields.file.url,
-    })),
-    images: result.fields.images.map((file) => ({
-      title: file.fields.title,
-      url: file.fields.file.url,
-      width: file.fields.file.details.image?.width || 0,
-      height: file.fields.file.details.image?.height || 0,
-    })),
+    files:
+      result.fields.files?.map((file) => ({
+        title: file.fields.title,
+        url: file.fields.file.url,
+      })) || [],
+    images:
+      result.fields.images?.map((file) => ({
+        title: file.fields.title,
+        url: file.fields.file.url,
+        width: file.fields.file.details.image?.width || 0,
+        height: file.fields.file.details.image?.height || 0,
+      })) || [],
   };
 };

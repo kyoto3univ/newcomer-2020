@@ -5,7 +5,8 @@
     "sourceMap": true,
     "lib": [
       "es7",
-      "esnext.asynciterable"
+      "esnext.asynciterable",
+      "dom"
     ],
     "jsx": "preserve",
     "moduleResolution": "node",
