@@ -19,7 +19,10 @@ const Container = styled.a`
   flex-direction: row;
 
   img {
+    width: 84px;
+    height: 84px;
     object-fit: cover;
+    display: inline-block;
   }
 `;
 
