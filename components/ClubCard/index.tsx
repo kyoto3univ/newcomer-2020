@@ -4,7 +4,7 @@ import styled from 'styled-components';
 type Props = {
   title: string;
   description: string;
-  image?: string;
+  image?: string | null;
   link: string;
 };
 

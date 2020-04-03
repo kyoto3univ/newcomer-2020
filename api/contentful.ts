@@ -15,7 +15,7 @@ type ClubInfo = {
   category?: Array<Entry<Category>>;
   image?: Asset;
   largeImage?: Asset;
-  shortDescription: string;
+  shortDescription?: string;
   description: string;
   movieUrl?: string;
 };
@@ -37,7 +37,7 @@ export const fetchClubList = async () => {
     id: item.sys.id,
     name: item.fields.name,
     categories: item.fields.category?.map(({ fields }) => fields.name) || [],
-    image: item.fields.image?.fields.file.url,
-    shortDescription: item.fields.shortDescription,
+    image: item.fields.image?.fields.file.url || null,
+    shortDescription: item.fields?.shortDescription || '',
   }));
 };
