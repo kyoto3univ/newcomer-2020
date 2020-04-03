@@ -3,7 +3,7 @@ import Head from 'next/head';
 import React from 'react';
 import Select, { OptionsType, ValueType } from 'react-select';
 import styled from 'styled-components';
-import { fetchClubList } from '../../api/contentful';
+import { fetchCategories, fetchClubList } from '../../api/contentful';
 import { ClubCard } from '../../components/ClubCard';
 import { Container } from '../../components/Container';
 import { SectionTitle } from '../../components/SectionTitle';
@@ -115,16 +115,12 @@ export default ({ clubs, categories }: Props) => {
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const clubs = await fetchClubList();
+  const categories = await fetchCategories();
 
   return {
     props: {
       clubs,
-      categories: Object.keys(
-        clubs.reduce<Record<string, number>>((obj, { categories }) => {
-          categories.forEach((category) => (obj[category] = 1));
-          return obj;
-        }, {}),
-      ),
+      categories: categories.map(({ name }) => name),
     },
   };
 };
