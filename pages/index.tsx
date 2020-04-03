@@ -21,18 +21,13 @@ export default () => {
         <ContentCardContainer>
           <ContentCard
             title='三大学共同授業（稲盛）の案内'
-            description='ああああああああああああああああああああああああああああああああああああああああああああ'
+            description='とは'
             link='/inamori'
           />
           <ContentCard
-            title='三大学共同授業（稲盛）の案内'
-            description='ああああああああああああああああああああああああああああああああああああああああああああ'
-            link='/inamori'
-          />
-          <ContentCard
-            title='三大学共同授業（稲盛）の案内'
-            description='ああああああああああああああああああああああああああああああああああああああああああああ'
-            link='/inamori'
+            title='部活・サークル紹介'
+            description='ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ'
+            link='/club-circle'
           />
         </ContentCardContainer>
       </Container>
