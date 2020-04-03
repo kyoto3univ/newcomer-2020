@@ -26,9 +26,10 @@ type Props = {
   image?: string | null;
   youtube?: string | null;
   imageMeta?: { width: number; height: number } | null;
+  imageAlt?: string | null;
 };
 
-export const ClubTopImage = ({ image, youtube }: Props) => {
+export const ClubTopImage = ({ image, youtube, imageAlt }: Props) => {
   if (youtube) {
     return (
       <Container>
@@ -40,7 +41,7 @@ export const ClubTopImage = ({ image, youtube }: Props) => {
   if (image) {
     return (
       <Container>
-        <LazyLoadImage src={image} />
+        <LazyLoadImage src={image} alt={imageAlt || ''} />
       </Container>
     );
   }

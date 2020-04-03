@@ -21,6 +21,9 @@ type ClubInfo = {
   location?: string;
   time?: string;
   urls?: string[];
+  univ: string[];
+  files: Asset[];
+  images: Asset[];
 };
 
 export const fetchClubList = async () => {
@@ -59,11 +62,22 @@ export const fetchClub = async (id: string) => {
     description: result.fields.description || '',
     largeImage: result.fields.largeImage?.fields.file.url || null,
     largeImageMeta: result.fields.largeImage?.fields.file.details.image || null,
+    largeImageAlt: result.fields.largeImage?.fields.title || '',
     youtubeId: result.fields.movieUrl
       ? result.fields.movieUrl.replace(/.+\?v=/, '').replace(/youtu\.be\//, '')
       : null,
     location: result.fields.location || null,
     time: result.fields.time || null,
     urls: result.fields.urls || [],
+    files: result.fields.files.map((file) => ({
+      title: file.fields.title,
+      url: file.fields.file.url,
+    })),
+    images: result.fields.images.map((file) => ({
+      title: file.fields.title,
+      url: file.fields.file.url,
+      width: file.fields.file.details.image?.width || 0,
+      height: file.fields.file.details.image?.height || 0,
+    })),
   };
 };

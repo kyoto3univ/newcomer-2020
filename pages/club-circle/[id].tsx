@@ -28,6 +28,7 @@ export default ({ club }: Props) => {
         <ClubTopImage
           image={club.largeImage}
           imageMeta={club.largeImageMeta}
+          imageAlt={club.largeImageAlt}
           youtube={club.youtubeId}
         />
         <CategoryList data={club.categories} />
