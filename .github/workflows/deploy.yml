@@ -1,0 +1,45 @@
+name: Production Deploy
+
+on:
+  push:
+    branches:
+      - production
+  repository_dispatch:
+    types: [deploy_prod]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      ACCESS_TOKEN: ${{ secrets.CONTNETFUL_TOKEN }}
+      SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - run: yarn install --frozen-lockfile
+      - run: yarn run build
+      - run: yarn run export
+
+      - run: "echo \"User-agent: *\nDisallow: /\" > ./dist/robots.txt"
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
+          publish_branch: prd-pages
