@@ -1,11 +1,11 @@
-name: Production Deploy
+name: Development Deploy (develop env)
 
 on:
   push:
     branches:
-      - production
+      - master
   repository_dispatch:
-    types: [deploy_prod]
+    types: [deploy_dev]
 
 jobs:
   deploy:
@@ -14,10 +14,11 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       ACCESS_TOKEN: ${{ secrets.CONTENTFUL_TOKEN }}
       SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
+      CONTENTFUL_ENV: develop
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: production
+          ref: master
 
       - name: Setup Node
         uses: actions/setup-node@v1
@@ -40,9 +41,10 @@ jobs:
         env:
           NODE_ENV: production
 
+      - run: "echo \"User-agent: *\nDisallow: /\" > ./out/robots.txt"
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out
-          publish_branch: prd-pages
+          publish_branch: dev-pages
