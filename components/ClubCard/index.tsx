@@ -19,10 +19,11 @@ const Container = styled.a`
   flex-direction: row;
 
   img {
+    min-width: 84px;
+    min-height: 84px;
     width: 84px;
     height: 84px;
     object-fit: cover;
-    display: inline-block;
   }
 `;
 
@@ -47,7 +48,12 @@ export const ClubCard = ({ title, description, link, image }: Props) => {
     <Link href={link} passHref>
       <Container>
         {image && (
-          <LazyLoadImage width={84} height={84} src={image} alt={title} />
+          <LazyLoadImage
+            width={84}
+            height={84}
+            src={`${image}?w=128&h=128&fit=fill`}
+            alt={title}
+          />
         )}
         <TextContainer>
           <Title>{title}</Title>
