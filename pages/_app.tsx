@@ -1,7 +1,11 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import Router from 'next/router';
+import { pageview } from '../api/gtag';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
+
+Router.events.on('routeChangeComplete', (url) => pageview(url));
 
 export default ({ Component, pageProps }: AppProps) => {
   return (
