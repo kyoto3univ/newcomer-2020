@@ -31,8 +31,7 @@ const Logo = styled.img`
   padding: 10px;
   height: 40px;
   @media screen and (max-width: 520px) {
-    height: 40px;
-    padding: 5px;
+    display: none;
   }
 `;
 
