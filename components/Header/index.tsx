@@ -12,6 +12,7 @@ const HeaderContainer = styled.header`
   width: 100%;
   height: 60px;
   background: #111;
+  z-index: 2;
   @media screen and (max-width: 520px) {
     height: 50px;
   }

@@ -17,6 +17,11 @@ const Item = styled.li`
   border: 1px solid transparent;
   font-size: 0.9em;
   word-break: break-all;
+  @media screen and (max-width: 520px) {
+    margin: 1.5px 1.5px;
+    padding: 0.5px 7px;
+    font-size: 0.85em;
+  }
 `;
 
 type Props = { data: string[] };
