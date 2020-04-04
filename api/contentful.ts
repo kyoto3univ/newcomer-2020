@@ -81,7 +81,9 @@ export const fetchClub = async (id: string) => {
     largeImageMeta: result.fields.largeImage?.fields.file.details.image || null,
     largeImageAlt: result.fields.largeImage?.fields.title || '',
     youtubeId: result.fields.movieUrl
-      ? result.fields.movieUrl.replace(/.+\?v=/, '').replace(/youtu\.be\//, '')
+      ? result.fields.movieUrl
+          .replace(/.+\?v=/, '')
+          .replace(/.+youtu\.be\//, '')
       : null,
     locationAndTime: result.fields.locationAndTime,
     contactUrl: result.fields.contactUrl || null,
