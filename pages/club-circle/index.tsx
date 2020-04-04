@@ -13,6 +13,7 @@ import { ExtractPromise } from '../../utils/return-type';
 const FilterContainer = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 0.8em;
 `;
 
 const SelectContainer = styled.div`
