@@ -46,23 +46,26 @@ export const ClubImages = ({ images }: Props) => {
   const imageUrls = React.useMemo(() => images.map(({ url }) => url), [images]);
 
   return (
-    <ImageList>
-      {images.map((image, index) => (
-        <LazyLoadImage
-          key={image.url}
-          src={`${image.url}?w=360&fit=thumb`}
-          alt={image.title}
-          onClick={() => openImageViewer(index)}
-        />
-      ))}
-      {images.length % 2 !== 0 && <EmptyImage />}
-      {isViewerOpen && (
-        <ImageViewer
-          src={imageUrls}
-          currentIndex={currentImage}
-          onClose={closeImageViewer}
-        />
-      )}
-    </ImageList>
+    <>
+      {images.length > 0 && <small>タップで拡大</small>}
+      <ImageList>
+        {images.map((image, index) => (
+          <LazyLoadImage
+            key={image.url}
+            src={`${image.url}?w=480`}
+            alt={image.title}
+            onClick={() => openImageViewer(index)}
+          />
+        ))}
+        {images.length % 2 !== 0 && <EmptyImage />}
+        {isViewerOpen && (
+          <ImageViewer
+            src={imageUrls}
+            currentIndex={currentImage}
+            onClose={closeImageViewer}
+          />
+        )}
+      </ImageList>
+    </>
   );
 };

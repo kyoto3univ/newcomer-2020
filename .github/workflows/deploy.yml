@@ -16,6 +16,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       ACCESS_TOKEN: ${{ secrets.CONTENTFUL_TOKEN }}
       SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
+      GA_ID: ${{ secrets.GA_ID }}
     steps:
       - uses: actions/checkout@v2
         with:
