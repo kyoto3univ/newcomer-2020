@@ -1,5 +1,6 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 
 export default ({ Component, pageProps }: AppProps) => {
@@ -27,6 +28,7 @@ export default ({ Component, pageProps }: AppProps) => {
       </Head>
       <Header />
       <Component {...pageProps} />
+      <Footer />
     </>
   );
 };
