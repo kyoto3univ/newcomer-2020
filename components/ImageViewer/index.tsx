@@ -13,7 +13,7 @@ interface State {
 }
 
 const Modal = styled.div`
-  z-index: 1;
+  z-index: 3;
   display: flex;
   align-items: center;
   position: fixed;
