@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import React from 'react';
 import Select, { OptionsType, ValueType } from 'react-select';
 import styled from 'styled-components';
@@ -34,7 +35,15 @@ type OptionType = {
   value: string;
 };
 export default ({ clubs, categories }: Props) => {
+  const router = useRouter();
   const [categoryFilter, setCategoryFilter] = React.useState<string[]>([]);
+
+  React.useEffect(() => {
+    if (decodeURIComponent(router.asPath).match(/#tags=(.+)/g)) {
+      const filter = RegExp.$1?.split(',') || [];
+      setCategoryFilter(filter.filter((item) => categories.includes(item)));
+    }
+  }, [router, router.asPath]);
 
   const filteredClubs = React.useMemo(() => {
     if (categoryFilter.length === 0) return clubs;
@@ -59,17 +68,28 @@ export default ({ clubs, categories }: Props) => {
   const handleSelectChange = React.useCallback(
     (options: ValueType<OptionType>) => {
       // if (options) setCategoryFilter([(options as OptionType).value]);
-      if (options)
-        setCategoryFilter(
-          (options as OptionsType<OptionType>).map(({ value }) => value),
+      if (options) {
+        const tags = (options as OptionsType<OptionType>).map(
+          ({ value }) => value,
         );
+
+        setCategoryFilter(tags);
+        router.replace({
+          pathname: router.pathname,
+          hash: `tags=${tags.join(',')}`,
+        });
+      }
     },
-    [],
+    [router.pathname],
   );
 
   const handleClearFilter = React.useCallback(
     (e: React.SyntheticEvent) => {
       setCategoryFilter([]);
+      router.replace({
+        pathname: router.pathname,
+        hash: null,
+      });
       e.preventDefault();
 
       return false;
