@@ -12,7 +12,7 @@ export const Footer = () => {
       <hr />
       <FooterText>
         {`Powered by `}
-        <a href='https://twitter.com/kyoto3univ'>京都三大学交流会</a>
+        <a href='https://twitter.com/kyoto3univ'>京都三大学学生交流会</a>
         {` Source code: `}
         <a href='https://github.com/kyoto3univ/newcomer-2020'>GitHub</a>
       </FooterText>
