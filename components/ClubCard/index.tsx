@@ -31,6 +31,9 @@ const Container = styled.a`
 
 const TextContainer = styled.div`
   margin-left: 12px;
+  @media screen and (max-width: 520px) {
+    margin-left: 8px;
+  }
 `;
 
 const Title = styled.h4`
@@ -38,11 +41,18 @@ const Title = styled.h4`
   font-weight: bold;
   font-size: 1.3em;
   color: #007bff;
+  @media screen and (max-width: 520px) {
+    font-size: 1.25em;
+    line-height: 1.2em;
+  }
 `;
 
 const Description = styled.p`
   line-height: 1.2em;
   margin: 3px;
+  @media screen and (max-width: 520px) {
+    line-height: 1.15em;
+  }
 `;
 
 export const ClubCard = ({
