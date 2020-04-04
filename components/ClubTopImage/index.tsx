@@ -45,7 +45,12 @@ export const ClubTopImage = ({ image, youtube, imageAlt }: Props) => {
         <YouTube
           videoId={youtube}
           containerClassName='yt'
-          opts={{ height: `${ytInitialHeight}` }}
+          opts={{
+            height: `${ytInitialHeight}`,
+            playerVars: {
+              rel: 0,
+            },
+          }}
         />
       </Container>
     );
