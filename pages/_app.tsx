@@ -12,6 +12,8 @@ export default ({ Component, pageProps }: AppProps) => {
             margin: 0;
             padding: 0;
             color: #212529;
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN',
+              'Hiragino Sans', Meiryo, sans-serif;
           }
 
           a {
