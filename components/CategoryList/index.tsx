@@ -6,11 +6,12 @@ const Container = styled.ul`
   padding: 0;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 `;
 
 const Item = styled.li`
   padding: 2px 16px;
-  margin: 0 5px;
+  margin: 2px 5px;
   background-color: #eee;
   border-radius: 1em;
   border: 1px solid transparent;
