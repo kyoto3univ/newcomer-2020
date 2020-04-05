@@ -13,6 +13,28 @@ module.exports = {
           removeDir: false,
           swDestRoot: './static',
           swURLRoot: '/static',
+          runtimeCaching: [
+            {
+              urlPattern: /\.json$/,
+              handler: 'NetworkFirst',
+              options: {
+                cacheName: 'data',
+                expiration: {
+                  maxAgeSeconds: 60 * 60 * 24,
+                },
+              },
+            },
+            {
+              urlPattern: /\.(jpg|png)/,
+              handler: 'CacheFirst',
+              options: {
+                cacheName: 'assets',
+                expiration: {
+                  maxAgeSeconds: 60 * 60 * 24 * 14,
+                },
+              },
+            },
+          ],
         }),
       );
     }
