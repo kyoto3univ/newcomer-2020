@@ -12,6 +12,7 @@ module.exports = {
         swDest: 'sw.js',
         skipWaiting: true,
         clientsClaim: false,
+        swDest: '../public/sw.js',
         runtimeCaching: [
           {
             urlPattern: /\.json$/,
