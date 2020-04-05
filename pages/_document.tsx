@@ -7,7 +7,6 @@ import Document, {
 } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 import { GALoader } from '../api/gtag';
-import { ServiceWorkerLoader } from '../components/ServiceWorkerLoader';
 
 export default class MyDocument extends Document {
   public static async getInitialProps(ctx: DocumentContext) {
@@ -43,7 +42,6 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          <ServiceWorkerLoader />
           <GALoader />
         </body>
       </Html>

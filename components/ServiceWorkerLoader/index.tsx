@@ -2,9 +2,9 @@ import React from 'react';
 
 export const ServiceWorkerLoader = () => {
   React.useEffect(() => {
-    if ('serviceWorker' in navigator) {
+    if (process.browser && 'serviceWorker' in navigator) {
       navigator.serviceWorker
-        .register('./sw.js')
+        .register('/sw.js')
         .then(() => {
           console.log('service worker registration successful');
         })
