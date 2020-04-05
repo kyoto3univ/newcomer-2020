@@ -6,6 +6,7 @@ import Document, {
   NextScript,
 } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
+import { GALoader } from '../api/gtag';
 
 export default class MyDocument extends Document {
   public static async getInitialProps(ctx: DocumentContext) {
@@ -41,25 +42,7 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          {process.env.GA_ID && (
-            <>
-              <script
-                async
-                src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_ID}`}
-              />
-              <script
-                dangerouslySetInnerHTML={{
-                  __html: `
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', '${process.env.GA_ID}', {
-  page_path: window.location.pathname,
-});`,
-                }}
-              />
-            </>
-          )}
+          <GALoader />
         </body>
       </Html>
     );

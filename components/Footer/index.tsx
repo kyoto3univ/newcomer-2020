@@ -17,8 +17,8 @@ export const Footer = () => {
         {` / Source code: `}
         <a href='https://github.com/kyoto3univ/newcomer-2020'>GitHub</a>
         {` / `}
-        <Link href='/privacy-policy' prefetch={false}>
-          プライバシーポリシー
+        <Link href='/privacy-policy' prefetch={false} passHref>
+          <a>プライバシーポリシー</a>
         </Link>
       </FooterText>
     </Container>

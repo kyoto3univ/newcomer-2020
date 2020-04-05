@@ -4,6 +4,7 @@ import Router from 'next/router';
 import { pageview } from '../api/gtag';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
+import { ServiceWorkerLoader } from '../components/ServiceWorkerLoader';
 
 Router.events.on('routeChangeComplete', (url) => pageview(url));
 
@@ -33,6 +34,7 @@ export default ({ Component, pageProps }: AppProps) => {
       <Header />
       <Component {...pageProps} />
       <Footer />
+      <ServiceWorkerLoader />
     </>
   );
 };
