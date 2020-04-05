@@ -66,5 +66,4 @@ yarn-error.log
 
 .next/
 out/
-public/sw.js*
-public/workbox-*
+static/
