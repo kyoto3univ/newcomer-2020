@@ -7,7 +7,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "export": "next export"
+    "export": "next export && cp ./.next/sw.js ./out && cp ./.next/workbox-*.js ./out"
   },
   "dependencies": {
     "babel-plugin-styled-components": "^1.10.7",
@@ -29,6 +29,7 @@
     "@types/react-select": "^3.0.11",
     "@types/styled-components": "^5.0.1",
     "prettier": "^2.0.2",
-    "tslint": "^6.1.1"
+    "tslint": "^6.1.1",
+    "workbox-webpack-plugin": "^5.1.2"
   }
 }

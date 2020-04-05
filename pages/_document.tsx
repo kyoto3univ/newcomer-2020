@@ -6,6 +6,7 @@ import Document, {
   NextScript,
 } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
+import { ServiceWorkerLoader } from '../components/ServiceWorkerLoader';
 
 export default class MyDocument extends Document {
   public static async getInitialProps(ctx: DocumentContext) {
@@ -41,6 +42,7 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <ServiceWorkerLoader />
           {process.env.GA_ID && (
             <>
               <script
