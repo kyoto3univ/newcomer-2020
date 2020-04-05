@@ -27,6 +27,39 @@ module.exports = function (migration) {
           max: 7,
         },
       },
+      {
+        in: [1, 2, 3, 4, 5, 6, 7],
+      },
+    ])
+    .disabled(false)
+    .omitted(false);
+
+  classInfo
+    .createField("type")
+    .name("授業種別")
+    .type("Symbol")
+    .localized(false)
+    .required(false)
+    .validations([
+      {
+        in: ["三大学合同", "教養科目", "選択必修等"],
+      },
+    ])
+    .disabled(false)
+    .omitted(false);
+
+  classInfo
+    .createField("summary")
+    .name("概要")
+    .type("Text")
+    .localized(false)
+    .required(true)
+    .validations([
+      {
+        size: {
+          max: 250,
+        },
+      },
     ])
     .disabled(false)
     .omitted(false);
@@ -54,15 +87,23 @@ module.exports = function (migration) {
     .validations([])
     .disabled(false)
     .omitted(false);
+
   classInfo
     .createField("textbook")
     .name("教科書")
-    .type("Symbol")
+    .type("Text")
     .localized(false)
     .required(false)
-    .validations([])
+    .validations([
+      {
+        size: {
+          max: 250,
+        },
+      },
+    ])
     .disabled(false)
     .omitted(false);
+
   classInfo
     .createField("evaluation")
     .name("成績評価")
@@ -81,6 +122,28 @@ module.exports = function (migration) {
     .validations([])
     .disabled(false)
     .omitted(false);
+
+  classInfo
+    .createField("officialUrl")
+    .name("公式シラバスURL")
+    .type("Array")
+    .localized(false)
+    .required(false)
+    .validations([])
+    .disabled(false)
+    .omitted(false)
+    .items({
+      type: "Symbol",
+
+      validations: [
+        {
+          regexp: {
+            pattern:
+              "^(ftp|http|https):\\/\\/(\\w+:{0,1}\\w*@)?(\\S+)(:[0-9]+)?(\\/|\\/([\\w#!:.?+=&%@!\\-/]))?$",
+          },
+        },
+      ],
+    });
 
   classInfo
     .createField("reactions")
@@ -105,8 +168,14 @@ module.exports = function (migration) {
 
   classInfo.changeFieldControl("title", "builtin", "singleLine", {});
 
-  classInfo.changeFieldControl("time", "builtin", "radio", {
+  classInfo.changeFieldControl("time", "builtin", "dropdown", {
     helpText: "7はその他",
+  });
+
+  classInfo.changeFieldControl("type", "builtin", "dropdown", {});
+
+  classInfo.changeFieldControl("summary", "builtin", "multipleLine", {
+    helpText: "シラバスなどから引用する",
   });
 
   classInfo.changeFieldControl("teachers", "builtin", "tagEditor", {});
@@ -114,6 +183,7 @@ module.exports = function (migration) {
   classInfo.changeFieldControl("textbook", "builtin", "singleLine", {});
   classInfo.changeFieldControl("evaluation", "builtin", "multipleLine", {});
   classInfo.changeFieldControl("notes", "builtin", "multipleLine", {});
+  classInfo.changeFieldControl("officialUrl", "builtin", "tagEditor", {});
 
   classInfo.changeFieldControl("reactions", "builtin", "entryLinksEditor", {
     bulkEditing: false,
