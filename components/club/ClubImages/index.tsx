@@ -52,7 +52,7 @@ export const ClubImages = ({ images }: Props) => {
         {images.map((image, index) => (
           <LazyLoadImage
             key={image.url}
-            src={`${image.url}?w=480`}
+            src={`${image.url}?w=480&fm=jpg&q=80`}
             alt={image.title}
             onClick={() => openImageViewer(index)}
           />
