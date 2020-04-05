@@ -7,8 +7,11 @@ declare global {
 const GAID = process.env.GA_ID;
 export const pageview = (url: string) => {
   if (GAID) {
-    window.gtag('config', GAID, {
-      page_path: url,
-    });
+    // 0.5秒空けることで確実に
+    setTimeout(() => {
+      window.gtag('config', GAID, {
+        page_path: url,
+      });
+    }, 500);
   }
 };
