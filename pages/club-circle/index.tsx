@@ -5,7 +5,7 @@ import React from 'react';
 import Select, { OptionsType, ValueType } from 'react-select';
 import styled from 'styled-components';
 import { fetchCategories, fetchClubList } from '../../api/contentful';
-import { ClubCard } from '../../components/ClubCard';
+import { ClubCard } from '../../components/club/ClubCard';
 import { Container } from '../../components/Container';
 import { Ogp } from '../../components/Ogp';
 import { SectionTitle } from '../../components/SectionTitle';

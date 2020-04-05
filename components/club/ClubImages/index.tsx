@@ -1,7 +1,7 @@
 import React from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import styled from 'styled-components';
-import ImageViewer from '../ImageViewer';
+import ImageViewer from '../../ImageViewer';
 
 const ImageList = styled.div`
   display: flex;

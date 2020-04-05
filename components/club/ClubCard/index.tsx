@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import styled from 'styled-components';
-import { CategoryList } from '../CategoryList';
+import { CategoryList } from '../../CategoryList';
 
 type Props = {
   id: string;
