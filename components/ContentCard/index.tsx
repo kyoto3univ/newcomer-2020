@@ -40,14 +40,15 @@ const Description = styled.p`
 `;
 
 type Props = {
-  title: string;
-  description: string;
+  title: string | React.ReactElement;
+  description: string | React.ReactElement;
   image?: string;
   link: string;
+  asLink?: string;
 };
-export const ContentCard = ({ title, description, link }: Props) => {
+export const ContentCard = ({ title, description, link, asLink }: Props) => {
   return (
-    <Link href={link} passHref>
+    <Link href={link} as={asLink} passHref>
       <Card>
         <Title>{title}</Title>
         <Description>{description}</Description>
