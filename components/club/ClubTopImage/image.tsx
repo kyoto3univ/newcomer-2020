@@ -1,6 +1,6 @@
 import React from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import ImageViewer from '../../ImageViewer';
+import { LazyImage } from '../../LazyImage';
 
 type Props = {
   image: string;
@@ -21,7 +21,6 @@ export const ClubTopImageImg = ({ imageMeta, image, imageAlt }: Props) => {
     [],
   );
   const [isViewerOpen, setIsViewerOpen] = React.useState(false);
-  const [isImageLoaded, setIsImageLoaded] = React.useState(false);
 
   const openImageViewer = React.useCallback(() => {
     setIsViewerOpen(true);
@@ -31,18 +30,13 @@ export const ClubTopImageImg = ({ imageMeta, image, imageAlt }: Props) => {
     setIsViewerOpen(false);
   }, []);
 
-  const onImageLoaded = React.useCallback(() => {
-    setIsImageLoaded(true);
-  }, []);
-
   return (
     <>
-      <LazyLoadImage
+      <LazyImage
         src={`${image}?w=${imageResizeWidth}&fm=jpg&q=85`}
         alt={imageAlt || ''}
-        height={isImageLoaded ? undefined : imageInitialHeight}
+        initialHeight={imageInitialHeight}
         onClick={openImageViewer}
-        afterLoad={onImageLoaded}
         effect={'opacity'}
       />
       {isViewerOpen && (
