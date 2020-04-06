@@ -36,7 +36,7 @@ module.exports = function (migration) {
 
   classInfo
     .createField("type")
-    .name("授業種別")
+    .name("授業種別(一般教養/専門など)")
     .type("Symbol")
     .localized(false)
     .required(false)
@@ -45,6 +45,16 @@ module.exports = function (migration) {
         in: ["三大学合同", "教養科目", "選択必修等"],
       },
     ])
+    .disabled(false)
+    .omitted(false);
+
+  classInfo
+    .createField("newClass")
+    .name("新規授業(KIT生にとって)")
+    .type("Boolean")
+    .localized(false)
+    .required(true)
+    .validations([])
     .disabled(false)
     .omitted(false);
 
@@ -65,6 +75,16 @@ module.exports = function (migration) {
     .omitted(false);
 
   classInfo
+    .createField("comment")
+    .name("学生に一言")
+    .type("Text")
+    .localized(false)
+    .required(false)
+    .validations([])
+    .disabled(false)
+    .omitted(false);
+
+  classInfo
     .createField("teachers")
     .name("担当教員")
     .type("Array")
@@ -77,16 +97,6 @@ module.exports = function (migration) {
       type: "Symbol",
       validations: [],
     });
-
-  classInfo
-    .createField("comment")
-    .name("学生に一言")
-    .type("Text")
-    .localized(false)
-    .required(false)
-    .validations([])
-    .disabled(false)
-    .omitted(false);
 
   classInfo
     .createField("textbook")
@@ -174,12 +184,17 @@ module.exports = function (migration) {
 
   classInfo.changeFieldControl("type", "builtin", "dropdown", {});
 
-  classInfo.changeFieldControl("summary", "builtin", "multipleLine", {
-    helpText: "シラバスなどから引用する",
+  classInfo.changeFieldControl("newClass", "builtin", "boolean", {
+    trueLabel: "Yes",
+    falseLabel: "No",
   });
 
-  classInfo.changeFieldControl("teachers", "builtin", "tagEditor", {});
+  classInfo.changeFieldControl("summary", "builtin", "multipleLine", {
+    helpText: "シラバスなどから引用するか、教員の一言を良い感じに切り取る",
+  });
+
   classInfo.changeFieldControl("comment", "builtin", "multipleLine", {});
+  classInfo.changeFieldControl("teachers", "builtin", "tagEditor", {});
   classInfo.changeFieldControl("textbook", "builtin", "singleLine", {});
   classInfo.changeFieldControl("evaluation", "builtin", "multipleLine", {});
   classInfo.changeFieldControl("notes", "builtin", "multipleLine", {});
