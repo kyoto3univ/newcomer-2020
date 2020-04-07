@@ -7,6 +7,7 @@ import {
   ReactionCard,
   ReactionCardContainer,
 } from '../../components/class/ReactionCard';
+import { Collapse } from '../../components/Collapse';
 import { Container } from '../../components/Container';
 import { Dl } from '../../components/DescriptionList';
 import { PreWrapP } from '../../components/PreWrapP';
@@ -16,6 +17,13 @@ const MetaContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   overflow-wrap: break-word;
+`;
+const CollapseTitle = styled.h4`
+  display: inline-block;
+  margin-bottom: 0;
+`;
+const CollapseContent = styled(PreWrapP)`
+  margin-top: 0;
 `;
 type Props = {
   classInfo: ExtractPromise<ReturnType<typeof fetchClass>>;
@@ -42,14 +50,14 @@ export default ({ classInfo }: Props) => {
             <dd>{classInfo.textbook || 'なし'}</dd>
           </Dl>
         </MetaContainer>
-        <section>
-          <h4>成績評価について</h4>
-          <PreWrapP>{classInfo.evaluation}</PreWrapP>
-        </section>
-        <section>
-          <h4>注意事項</h4>
-          <PreWrapP>{classInfo.notes}</PreWrapP>
-        </section>
+        <Collapse
+          header={<CollapseTitle>成績評価について</CollapseTitle>}
+          content={<CollapseContent>{classInfo.evaluation}</CollapseContent>}
+        />
+        <Collapse
+          header={<CollapseTitle>注意事項</CollapseTitle>}
+          content={<CollapseContent>{classInfo.notes}</CollapseContent>}
+        />
         <section>
           <h4>みんなの感想</h4>
           <ReactionCardContainer>
