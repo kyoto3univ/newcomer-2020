@@ -15,6 +15,20 @@ module.exports = function (migration) {
     .omitted(false);
 
   classInfo
+    .createField("day")
+    .name("曜日")
+    .type("Symbol")
+    .localized(false)
+    .required(true)
+    .validations([
+      {
+        in: ["月", "火", "水", "木", "金", "集中"],
+      },
+    ])
+    .disabled(false)
+    .omitted(false);
+
+  classInfo
     .createField("time")
     .name("時限")
     .type("Integer")
@@ -67,7 +81,7 @@ module.exports = function (migration) {
     .validations([
       {
         size: {
-          max: 250,
+          max: 100,
         },
       },
     ])
@@ -177,6 +191,7 @@ module.exports = function (migration) {
     });
 
   classInfo.changeFieldControl("title", "builtin", "singleLine", {});
+  classInfo.changeFieldControl("day", "builtin", "dropdown", {});
 
   classInfo.changeFieldControl("time", "builtin", "dropdown", {
     helpText: "7はその他",
@@ -189,8 +204,9 @@ module.exports = function (migration) {
     falseLabel: "No",
   });
 
-  classInfo.changeFieldControl("summary", "builtin", "multipleLine", {
-    helpText: "シラバスなどから引用するか、教員の一言を良い感じに切り取る",
+  classInfo.changeFieldControl("summary", "builtin", "singleLine", {
+    helpText:
+      "シラバスなどから引用するか、教員の一言を90字程度に良い感じに切り取る",
   });
 
   classInfo.changeFieldControl("comment", "builtin", "multipleLine", {});
