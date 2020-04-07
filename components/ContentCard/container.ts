@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ContentCardContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(auto, 320px));
+  grid-template-columns: repeat(auto-fit, minmax(auto, 360px));
   justify-content: space-around;
   align-content: center;
   grid-row-gap: 1.4rem;
