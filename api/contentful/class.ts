@@ -52,6 +52,7 @@ export const fetchClass = async (id: string) => {
     id: result.sys.id,
     title: result.fields.title,
     time: result.fields.time,
+    day: result.fields.day,
     type: result.fields.type || null,
     summary: result.fields.summary || '',
     teachers: result.fields.teachers || [],
@@ -61,6 +62,9 @@ export const fetchClass = async (id: string) => {
     notes: result.fields.notes || null,
     officialUrl: result.fields.officialUrl || null,
     reactions:
-      result.fields?.reactions.map(({ fields }) => fields.content) || [],
+      result.fields?.reactions.map(({ fields, sys }) => ({
+        id: sys.id,
+        content: fields.content,
+      })) || [],
   };
 };
