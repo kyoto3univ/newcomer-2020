@@ -62,7 +62,7 @@ export const fetchClass = async (id: string) => {
     notes: result.fields.notes || null,
     officialUrl: result.fields.officialUrl || null,
     reactions:
-      result.fields?.reactions.map(({ fields, sys }) => ({
+      result.fields?.reactions?.map(({ fields, sys }) => ({
         id: sys.id,
         content: fields.content,
       })) || [],
