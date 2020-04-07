@@ -5,8 +5,6 @@ const Card = styled.a`
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   box-shadow: 5px;
-  max-width: 300px;
-  margin: 1.3rem;
   padding: 1.25rem;
   cursor: pointer;
   box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.3);
@@ -40,14 +38,15 @@ const Description = styled.p`
 `;
 
 type Props = {
-  title: string;
-  description: string;
+  title: string | React.ReactElement;
+  description: string | React.ReactElement;
   image?: string;
   link: string;
+  asLink?: string;
 };
-export const ContentCard = ({ title, description, link }: Props) => {
+export const ContentCard = ({ title, description, link, asLink }: Props) => {
   return (
-    <Link href={link} passHref>
+    <Link href={link} as={asLink} passHref>
       <Card>
         <Title>{title}</Title>
         <Description>{description}</Description>

@@ -1,14 +1,14 @@
 import React from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import styled from 'styled-components';
-import ImageViewer from '../ImageViewer';
+import ImageViewer from '../../ImageViewer';
+import { LazyImage } from '../../LazyImage';
 
 const ImageList = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
-  > img {
+  .lazy-load-image-background > img {
     margin: 15px;
     max-width: 90%;
     width: 360px;
@@ -50,11 +50,13 @@ export const ClubImages = ({ images }: Props) => {
       {images.length > 0 && <small>タップで拡大</small>}
       <ImageList>
         {images.map((image, index) => (
-          <LazyLoadImage
+          <LazyImage
             key={image.url}
-            src={`${image.url}?w=480`}
+            src={`${image.url}?w=480&fm=jpg&q=80`}
             alt={image.title}
             onClick={() => openImageViewer(index)}
+            initialHeight={200}
+            effect='opacity'
           />
         ))}
         {images.length % 2 !== 0 && <EmptyImage />}

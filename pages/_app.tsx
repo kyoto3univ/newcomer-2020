@@ -6,6 +6,8 @@ import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { ServiceWorkerLoader } from '../components/ServiceWorkerLoader';
 
+import 'react-lazy-load-image-component/src/effects/opacity.css';
+
 Router.events.on('routeChangeComplete', (url) => pageview(url));
 
 export default ({ Component, pageProps }: AppProps) => {

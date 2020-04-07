@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import styled from 'styled-components';
-import { CategoryList } from '../CategoryList';
+import { CategoryList } from '../../CategoryList';
 
 type Props = {
   id: string;
@@ -73,7 +73,7 @@ export const ClubCard = ({
           <LazyLoadImage
             width={84}
             height={84}
-            src={`${image}?w=128&h=128&fit=fill`}
+            src={`${image}?w=128&h=128&fit=fill&fm=jpg&q=80`}
             alt={title}
           />
         )}

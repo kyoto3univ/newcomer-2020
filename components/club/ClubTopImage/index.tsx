@@ -1,7 +1,7 @@
 import React from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import YouTube from 'react-youtube';
 import styled from 'styled-components';
+import { ClubTopImageImg } from './image';
+import { ClubTopImageYouTube } from './youtube';
 
 const Container = styled.div`
   width: 100%;
@@ -13,8 +13,16 @@ const Container = styled.div`
   .yt {
     width: 85%;
   }
+  img {
+    cursor: pointer;
+    object-fit: contain;
+    max-height: 800px;
+  }
   iframe {
     width: 100%;
+  }
+  .lazy-load-image-background {
+    text-align: center;
   }
 
   @media screen and (max-width: 520px) {
@@ -31,22 +39,16 @@ type Props = {
   imageAlt?: string | null;
 };
 
-export const ClubTopImage = ({ image, youtube, imageAlt }: Props) => {
-  const ytInitialHeight = React.useMemo(
-    () =>
-      process.browser && document.body.clientWidth < 520
-        ? (document.body.clientWidth / 16) * 9
-        : 360,
-    [],
-  );
+export const ClubTopImage = ({
+  image,
+  youtube,
+  imageAlt,
+  imageMeta,
+}: Props) => {
   if (youtube) {
     return (
       <Container>
-        <YouTube
-          videoId={youtube}
-          containerClassName='yt'
-          opts={{ height: `${ytInitialHeight}` }}
-        />
+        <ClubTopImageYouTube youtube={youtube} />
       </Container>
     );
   }
@@ -54,7 +56,11 @@ export const ClubTopImage = ({ image, youtube, imageAlt }: Props) => {
   if (image) {
     return (
       <Container>
-        <LazyLoadImage src={image} alt={imageAlt || ''} />
+        <ClubTopImageImg
+          image={image}
+          imageAlt={imageAlt}
+          imageMeta={imageMeta}
+        />
       </Container>
     );
   }

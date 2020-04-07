@@ -15,6 +15,20 @@ module.exports = function (migration) {
     .omitted(false);
 
   classInfo
+    .createField("day")
+    .name("曜日")
+    .type("Symbol")
+    .localized(false)
+    .required(true)
+    .validations([
+      {
+        in: ["月", "火", "水", "木", "金", "集中"],
+      },
+    ])
+    .disabled(false)
+    .omitted(false);
+
+  classInfo
     .createField("time")
     .name("時限")
     .type("Integer")
@@ -27,7 +41,60 @@ module.exports = function (migration) {
           max: 7,
         },
       },
+      {
+        in: [1, 2, 3, 4, 5, 6, 7],
+      },
     ])
+    .disabled(false)
+    .omitted(false);
+
+  classInfo
+    .createField("type")
+    .name("授業種別(一般教養/専門など)")
+    .type("Symbol")
+    .localized(false)
+    .required(false)
+    .validations([
+      {
+        in: ["三大学合同", "教養科目", "選択必修等"],
+      },
+    ])
+    .disabled(false)
+    .omitted(false);
+
+  classInfo
+    .createField("newClass")
+    .name("新規授業(KIT生にとって)")
+    .type("Boolean")
+    .localized(false)
+    .required(true)
+    .validations([])
+    .disabled(false)
+    .omitted(false);
+
+  classInfo
+    .createField("summary")
+    .name("概要")
+    .type("Text")
+    .localized(false)
+    .required(true)
+    .validations([
+      {
+        size: {
+          max: 100,
+        },
+      },
+    ])
+    .disabled(false)
+    .omitted(false);
+
+  classInfo
+    .createField("comment")
+    .name("学生に一言")
+    .type("Text")
+    .localized(false)
+    .required(false)
+    .validations([])
     .disabled(false)
     .omitted(false);
 
@@ -46,23 +113,21 @@ module.exports = function (migration) {
     });
 
   classInfo
-    .createField("comment")
-    .name("学生に一言")
+    .createField("textbook")
+    .name("教科書")
     .type("Text")
     .localized(false)
     .required(false)
-    .validations([])
+    .validations([
+      {
+        size: {
+          max: 250,
+        },
+      },
+    ])
     .disabled(false)
     .omitted(false);
-  classInfo
-    .createField("textbook")
-    .name("教科書")
-    .type("Symbol")
-    .localized(false)
-    .required(false)
-    .validations([])
-    .disabled(false)
-    .omitted(false);
+
   classInfo
     .createField("evaluation")
     .name("成績評価")
@@ -81,6 +146,28 @@ module.exports = function (migration) {
     .validations([])
     .disabled(false)
     .omitted(false);
+
+  classInfo
+    .createField("officialUrl")
+    .name("公式シラバスURL")
+    .type("Array")
+    .localized(false)
+    .required(false)
+    .validations([])
+    .disabled(false)
+    .omitted(false)
+    .items({
+      type: "Symbol",
+
+      validations: [
+        {
+          regexp: {
+            pattern:
+              "^(ftp|http|https):\\/\\/(\\w+:{0,1}\\w*@)?(\\S+)(:[0-9]+)?(\\/|\\/([\\w#!:.?+=&%@!\\-/]))?$",
+          },
+        },
+      ],
+    });
 
   classInfo
     .createField("reactions")
@@ -104,16 +191,30 @@ module.exports = function (migration) {
     });
 
   classInfo.changeFieldControl("title", "builtin", "singleLine", {});
+  classInfo.changeFieldControl("day", "builtin", "dropdown", {});
 
-  classInfo.changeFieldControl("time", "builtin", "radio", {
+  classInfo.changeFieldControl("time", "builtin", "dropdown", {
     helpText: "7はその他",
   });
 
-  classInfo.changeFieldControl("teachers", "builtin", "tagEditor", {});
+  classInfo.changeFieldControl("type", "builtin", "dropdown", {});
+
+  classInfo.changeFieldControl("newClass", "builtin", "boolean", {
+    trueLabel: "Yes",
+    falseLabel: "No",
+  });
+
+  classInfo.changeFieldControl("summary", "builtin", "singleLine", {
+    helpText:
+      "シラバスなどから引用するか、教員の一言を90字程度に良い感じに切り取る",
+  });
+
   classInfo.changeFieldControl("comment", "builtin", "multipleLine", {});
+  classInfo.changeFieldControl("teachers", "builtin", "tagEditor", {});
   classInfo.changeFieldControl("textbook", "builtin", "singleLine", {});
   classInfo.changeFieldControl("evaluation", "builtin", "multipleLine", {});
   classInfo.changeFieldControl("notes", "builtin", "multipleLine", {});
+  classInfo.changeFieldControl("officialUrl", "builtin", "tagEditor", {});
 
   classInfo.changeFieldControl("reactions", "builtin", "entryLinksEditor", {
     bulkEditing: false,
