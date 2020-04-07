@@ -15,9 +15,14 @@ const Container = styled.div`
   }
   img {
     cursor: pointer;
+    object-fit: contain;
+    max-height: 800px;
   }
   iframe {
     width: 100%;
+  }
+  .lazy-load-image-background {
+    text-align: center;
   }
 
   @media screen and (max-width: 520px) {
