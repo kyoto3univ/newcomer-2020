@@ -60,6 +60,21 @@ const SpTitle = styled(Title)`
   }
 `;
 
+const PWABack = styled.span`
+  display: inline-block;
+  height: 60px;
+  width: 40px;
+  @media screen and (max-width: 520px) {
+    height: 50px;
+    width: 40px;
+  }
+  background-image: url(/images/buttons/arrow-back.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 36px;
+  cursor: pointer;
+`;
+
 const SubLinkContainer = styled.div`
   margin-left: auto;
 `;
@@ -75,15 +90,23 @@ const SubLink = styled.a`
   }
 `;
 export const Header = () => {
-  const { pathname } = useRouter();
+  const { pathname, back } = useRouter();
+  const isPWA = React.useMemo(() => {
+    return (
+      process.browser &&
+      window.matchMedia &&
+      matchMedia('(display-mode: standalone)').matches
+    );
+  }, []);
   return (
     <HeaderContainer>
       <HeaderInnerContainer>
+        {isPWA && pathname !== '/' && <PWABack onClick={back} />}
         <Link href='/' passHref>
           <HeaderLink>
             <Logo src='/logo.jpg' />
             <NormalTitle>京都工繊新入生応援サイト</NormalTitle>
-            {pathname !== '/' && <SpTitle>TOPに戻る</SpTitle>}
+            {pathname !== '/' && !isPWA && <SpTitle>TOPに戻る</SpTitle>}
           </HeaderLink>
         </Link>
         <SubLinkContainer>
