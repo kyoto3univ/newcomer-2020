@@ -14,7 +14,7 @@ type Props = {
 const Container = styled.a`
   border-top: 1px solid rgba(0, 0, 0, 0.3);
   text-decoration: none;
-  color: #212529;
+  color: ${({ theme }) => theme.club.cardTextColor};
   display: block;
   padding: 1em 0;
   display: flex;
@@ -40,7 +40,7 @@ const Title = styled.h4`
   margin: 3px;
   font-weight: bold;
   font-size: 1.3em;
-  color: #007bff;
+  color: ${({ theme }) => theme.club.cardTitleColor};
   @media screen and (max-width: 520px) {
     font-size: 1.25em;
     line-height: 1.2em;

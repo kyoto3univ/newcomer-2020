@@ -11,7 +11,7 @@ const Card = styled.a`
   transition: transform 0.2s ease-in;
   transform: scale(1);
   text-decoration: none;
-  color: #212529;
+  color: ${({ theme }) => theme.card.textColor};
 
   &:hover {
     transform: scale(1.05);
@@ -25,7 +25,7 @@ const Title = styled.h5`
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: 1.25em;
-  color: #007bff;
+  color: ${({ theme }) => theme.card.titleColor};
 
   &::after {
     content: '\0bb';

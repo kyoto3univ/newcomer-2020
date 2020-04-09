@@ -11,7 +11,7 @@ const HeaderContainer = styled.header`
   box-sizing: border-box;
   width: 100%;
   height: 60px;
-  background: #222;
+  background: ${({ theme }) => theme.header.bgColor};
   z-index: 2;
   @media screen and (max-width: 520px) {
     height: 50px;
@@ -38,7 +38,7 @@ const Logo = styled.img`
 
 const Title = styled.span`
   display: inline-block;
-  color: #f70;
+  color: ${({ theme }) => theme.header.linkColor};
   font-size: 22px;
   padding-left: 10px;
   line-height: 60px;
@@ -67,7 +67,7 @@ const SubLink = styled.a`
   margin: 0 0.5em;
   text-decoration: none;
   line-height: 60px;
-  color: #f70;
+  color: ${({ theme }) => theme.header.linkColor};
 
   @media screen and (max-width: 520px) {
     line-height: 50px;
@@ -96,11 +96,11 @@ export const Header = () => {
       <style jsx global>
         {`
           body {
-            margin-top: 75px;
+            margin-top: 75px !important;
           }
           @media screen and (max-width: 520px) {
             body {
-              margin-top: 65px;
+              margin-top: 65px !important;
             }
           }
         `}

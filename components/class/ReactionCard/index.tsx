@@ -9,7 +9,7 @@ const Card = styled.a`
   transition: transform 0.2s ease-in;
   transform: scale(1);
   text-decoration: none;
-  color: #212529;
+  color: ${({ theme }) => theme.card.textColor};
   width: 90%;
   margin: 5px;
 `;

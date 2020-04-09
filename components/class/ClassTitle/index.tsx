@@ -3,8 +3,8 @@ import { SectionTitle } from '../../SectionTitle';
 
 const Hour = styled.span`
   font-size: 0.7em;
-  color: #fff;
-  background-color: #777;
+  color: ${({ theme }) => theme.class.hourColor};
+  background-color: ${({ theme }) => theme.class.hourBgColor};
   line-height: 1.25em;
   border: 1px solid transparent;
   border-radius: 4px;
