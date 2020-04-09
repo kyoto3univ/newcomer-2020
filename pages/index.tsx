@@ -16,13 +16,14 @@ export default () => {
         description='このサイトでは、COVID-19の影響で新歓や初回授業を受けられなくなった新入生をサポートする情報を配信しています'
       />
       <Container>
-        <SectionTitle>このサイトについて</SectionTitle>
+        <SectionTitle sakura>このサイトを作った理由</SectionTitle>
         <p>
-          {`このサイトでは、COVID-19の影響で新歓や初回授業を受けられなくなった京都工芸繊維大学の新入生をサポートする情報を配信しています。`}
+          {`今年度の京都工芸繊維大学の新入生は、COVID-19の影響で新歓や初回授業を受けられなくなっています。`}
+          {`そんな中で、SNS上で分散してしまった新歓情報などをまとめて届けるためにこのサイトを作りました。`}
         </p>
       </Container>
       <Container>
-        <SectionTitle>コンテンツ</SectionTitle>
+        <SectionTitle sakura>新入生向け情報をチェック!</SectionTitle>
         <ContentCardContainer>
           <ContentCard
             title='部活・サークル紹介'

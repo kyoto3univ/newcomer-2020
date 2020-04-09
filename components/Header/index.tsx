@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 import { Container } from '../Container';
@@ -11,7 +12,7 @@ const HeaderContainer = styled.header`
   box-sizing: border-box;
   width: 100%;
   height: 60px;
-  background: #111;
+  background: ${({ theme }) => theme.header.bgColor};
   z-index: 2;
   @media screen and (max-width: 520px) {
     height: 50px;
@@ -38,7 +39,7 @@ const Logo = styled.img`
 
 const Title = styled.span`
   display: inline-block;
-  color: #fff;
+  color: ${({ theme }) => theme.header.linkColor};
   font-size: 22px;
   padding-left: 10px;
   line-height: 60px;
@@ -59,17 +60,22 @@ const SpTitle = styled(Title)`
   }
 `;
 
-const SubLink = styled.a`
+const SubLinkContainer = styled.div`
   margin-left: auto;
+`;
+
+const SubLink = styled.a`
+  margin: 0 0.5em;
   text-decoration: none;
   line-height: 60px;
-  color: #fff;
+  color: ${({ theme }) => theme.header.linkColor};
 
   @media screen and (max-width: 520px) {
     line-height: 50px;
   }
 `;
 export const Header = () => {
+  const { pathname } = useRouter();
   return (
     <HeaderContainer>
       <HeaderInnerContainer>
@@ -77,21 +83,26 @@ export const Header = () => {
           <HeaderLink>
             <Logo src='/logo.jpg' />
             <NormalTitle>京都工繊新入生応援サイト</NormalTitle>
-            <SpTitle>トップ</SpTitle>
+            {pathname !== '/' && <SpTitle>TOPに戻る</SpTitle>}
           </HeaderLink>
         </Link>
-        <Link href='/club-circle' passHref>
-          <SubLink>サークル紹介</SubLink>
-        </Link>
+        <SubLinkContainer>
+          <Link href='/club-circle' passHref>
+            <SubLink>サークル紹介</SubLink>
+          </Link>
+          <Link href='/class' passHref>
+            <SubLink>授業紹介</SubLink>
+          </Link>
+        </SubLinkContainer>
       </HeaderInnerContainer>
       <style jsx global>
         {`
           body {
-            margin-top: 75px;
+            margin-top: 75px !important;
           }
           @media screen and (max-width: 520px) {
             body {
-              margin-top: 65px;
+              margin-top: 65px !important;
             }
           }
         `}
