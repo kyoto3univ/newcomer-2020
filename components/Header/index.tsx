@@ -11,7 +11,7 @@ const HeaderContainer = styled.header`
   box-sizing: border-box;
   width: 100%;
   height: 60px;
-  background: #111;
+  background: #222;
   z-index: 2;
   @media screen and (max-width: 520px) {
     height: 50px;
@@ -38,7 +38,7 @@ const Logo = styled.img`
 
 const Title = styled.span`
   display: inline-block;
-  color: #fff;
+  color: #f70;
   font-size: 22px;
   padding-left: 10px;
   line-height: 60px;
@@ -59,11 +59,15 @@ const SpTitle = styled(Title)`
   }
 `;
 
-const SubLink = styled.a`
+const SubLinkContainer = styled.div`
   margin-left: auto;
+`;
+
+const SubLink = styled.a`
+  margin: 0 0.5em;
   text-decoration: none;
   line-height: 60px;
-  color: #fff;
+  color: #f70;
 
   @media screen and (max-width: 520px) {
     line-height: 50px;
@@ -80,9 +84,14 @@ export const Header = () => {
             <SpTitle>トップ</SpTitle>
           </HeaderLink>
         </Link>
-        <Link href='/club-circle' passHref>
-          <SubLink>サークル紹介</SubLink>
-        </Link>
+        <SubLinkContainer>
+          <Link href='/club-circle' passHref>
+            <SubLink>サークル紹介</SubLink>
+          </Link>
+          <Link href='/class' passHref>
+            <SubLink>授業紹介</SubLink>
+          </Link>
+        </SubLinkContainer>
       </HeaderInnerContainer>
       <style jsx global>
         {`
