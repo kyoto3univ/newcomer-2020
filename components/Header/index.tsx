@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 import { Container } from '../Container';
@@ -74,6 +75,7 @@ const SubLink = styled.a`
   }
 `;
 export const Header = () => {
+  const { pathname } = useRouter();
   return (
     <HeaderContainer>
       <HeaderInnerContainer>
@@ -81,7 +83,7 @@ export const Header = () => {
           <HeaderLink>
             <Logo src='/logo.jpg' />
             <NormalTitle>京都工繊新入生応援サイト</NormalTitle>
-            <SpTitle>TOP</SpTitle>
+            {pathname !== '/' && <SpTitle>TOPに戻る</SpTitle>}
           </HeaderLink>
         </Link>
         <SubLinkContainer>
