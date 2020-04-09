@@ -81,7 +81,7 @@ export const Header = () => {
           <HeaderLink>
             <Logo src='/logo.jpg' />
             <NormalTitle>京都工繊新入生応援サイト</NormalTitle>
-            <SpTitle>トップ</SpTitle>
+            <SpTitle>TOP</SpTitle>
           </HeaderLink>
         </Link>
         <SubLinkContainer>

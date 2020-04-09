@@ -1,20 +1,21 @@
 export const theme = {
   textColor: '#212529',
-  linkColor: '#007bff',
+  linkColor: '#0f94b3',
   header: {
-    bgColor: '#222',
+    bgColor: '#0f94b3',
     linkColor: '#fff',
   },
   sectionTitle: {
-    color: '#111',
-    lineColor: '#f20',
+    color: '#0f94b3',
+    lineColor: '#0f94b3',
+    fontSize: '1.3em',
   },
   card: {
-    titleColor: '#007bff',
+    titleColor: '#0f94b3',
     textColor: '#212529',
   },
   club: {
-    cardTitleColor: '#007bff',
+    cardTitleColor: '#0f94b3',
     cardTextColor: '#212529',
   },
   class: {
