@@ -10,6 +10,7 @@ import {
 import { Collapse } from '../../components/Collapse';
 import { Container } from '../../components/Container';
 import { Dl } from '../../components/DescriptionList';
+import { Ogp } from '../../components/Ogp';
 import { PreWrapP } from '../../components/PreWrapP';
 import { ExtractPromise } from '../../utils/return-type';
 
@@ -33,6 +34,10 @@ export default ({ classInfo }: Props) => {
     <>
       <Head>
         <title>{`${classInfo.title} - 科目紹介`}</title>
+        <Ogp
+          title={`${classInfo.title} - 科目紹介`}
+          description={classInfo.comment || '授業紹介'}
+        />
       </Head>
       <Container>
         <ClassTitle {...classInfo} />

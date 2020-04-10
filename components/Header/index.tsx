@@ -110,9 +110,6 @@ export const Header = () => {
           </HeaderLink>
         </Link>
         <SubLinkContainer>
-          <Link href='/club-circle' passHref>
-            <SubLink>サークル紹介</SubLink>
-          </Link>
           <Link href='/class' passHref>
             <SubLink>授業紹介</SubLink>
           </Link>
