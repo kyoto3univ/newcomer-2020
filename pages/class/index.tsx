@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { fetchClassList } from '../../api/contentful/class';
 import { ClassList } from '../../components/class/ClassList';
 import { Container } from '../../components/Container';
+import { Ogp } from '../../components/Ogp';
 import { SectionTitle } from '../../components/SectionTitle';
 import { ExtractPromise } from '../../utils/return-type';
 
@@ -13,7 +14,11 @@ export default ({ classes }: Props) => {
   return (
     <>
       <Head>
-        <title>3大学共同授業の案内</title>
+        <title>授業の案内</title>
+        <Ogp
+          title={`授業の案内`}
+          description={'授業の内容や感想を紹介します'}
+        />
       </Head>
       <Container>
         <section>
