@@ -19,17 +19,11 @@ export default () => {
         <SectionTitle sakura>このサイトを作った理由</SectionTitle>
         <p>
           {`今年度の京都工芸繊維大学の新入生は、COVID-19の影響で新歓や初回授業を受けられなくなっています。`}
-          {`そんな中で、SNS上で分散してしまった新歓情報などをまとめて届けるためにこのサイトを作りました。`}
         </p>
       </Container>
       <Container>
         <SectionTitle sakura>新入生向け情報をチェック!</SectionTitle>
         <ContentCardContainer>
-          <ContentCard
-            title='部活・サークル紹介'
-            description='京都工芸繊維大学のサークル・部活動や他大学のインカレサークルを紹介します'
-            link='/club-circle'
-          />
           <ContentCard
             title='授業の紹介'
             description='一般教養や選択科目、さらに三大学合同で行う授業について、教員や生徒からのコメントを交えて紹介します。'
