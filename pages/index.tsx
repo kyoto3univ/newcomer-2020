@@ -19,6 +19,7 @@ export default () => {
         <SectionTitle sakura>このサイトを作った理由</SectionTitle>
         <p>
           {`今年度の京都工芸繊維大学の新入生は、COVID-19の影響で新歓や初回授業を受けられなくなっています。`}
+          {`そこで、新入生の助けとなる情報を発信するために作成しました。`}
         </p>
       </Container>
       <Container>
