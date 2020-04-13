@@ -182,7 +182,7 @@ export default ({ classes, hours, tags }: Props) => {
             その場合は、その時間の科目を履修しないか、受講登録修正期間に空き定員のある授業に登録することになります。
           </p>
           <p>
-            ・卒業認定に必要な単位数が、科目分類ごとに指定されている大学もあります。(科目分類：人と自然、人と文化、人と社会etc…)
+            ・卒業認定に必要な単位数が、科目分類ごとに指定されている大学もあります。(科目分類例：人と自然、人と文化、人と社会etc…)
           </p>
         </section>
         <section>
@@ -200,7 +200,7 @@ export default ({ classes, hours, tags }: Props) => {
                 options={tagSelectOptions}
                 onChange={handleTagSelectChange}
                 value={tagSelectedOptions}
-                placeholder='タグで絞り込み'
+                placeholder='科目分類で絞り込み'
                 isMulti
                 className='tags'
               />
