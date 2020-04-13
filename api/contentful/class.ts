@@ -18,6 +18,7 @@ type ClassInfo = {
   notes: string | null;
   officialUrl: string | null;
   reactions: Array<Entry<ClassReaction>>;
+  tags: string[];
 };
 
 export const fetchClassList = async () => {
@@ -30,6 +31,7 @@ export const fetchClassList = async () => {
       'fields.time',
       'fields.type',
       'fields.summary',
+      'fields.tags',
     ].join(','),
     limit: 500,
     order: 'fields.time',
@@ -42,6 +44,7 @@ export const fetchClassList = async () => {
     day: item.fields.day,
     type: item.fields.type || null,
     summary: item.fields.summary || '',
+    tags: item.fields.tags || [],
   }));
 };
 
@@ -61,6 +64,7 @@ export const fetchClass = async (id: string) => {
     evaluation: result.fields.evaluation || null,
     notes: result.fields.notes || null,
     officialUrl: result.fields.officialUrl || null,
+    tags: result.fields.tags || [],
     reactions:
       result.fields?.reactions?.map(({ fields, sys }) => ({
         id: sys.id,

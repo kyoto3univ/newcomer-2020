@@ -2,6 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import styled from 'styled-components';
 import { fetchClass, fetchClassList } from '../../api/contentful/class';
+import { CategoryList } from '../../components/CategoryList';
 import { ClassTitle } from '../../components/class/ClassTitle';
 import {
   ReactionCard,
@@ -41,6 +42,7 @@ export default ({ classInfo }: Props) => {
       </Head>
       <Container>
         <ClassTitle {...classInfo} />
+        <CategoryList data={classInfo.tags} />
         <section>
           <h4>担当教員から一言</h4>
           <PreWrapP>{classInfo.comment}</PreWrapP>
