@@ -15,7 +15,9 @@ const FilterContainer = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 0.8em;
-  flex-wrap: wrap;
+  @media screen and (max-width: 520px) {
+    flex-wrap: wrap;
+  }
 `;
 
 const SelectContainer = styled.div`
