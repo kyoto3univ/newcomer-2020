@@ -91,7 +91,7 @@ export const Header = () => {
         <Link href='/' passHref>
           <HeaderLink>
             <Logo src='/logo.jpg' />
-            <NormalTitle>京都工繊新入生応援サイト</NormalTitle>
+            <NormalTitle>新入生応援サイト</NormalTitle>
             {pathname !== '/' && !isPWA && <SpTitle>TOPに戻る</SpTitle>}
           </HeaderLink>
         </Link>
