@@ -32,7 +32,7 @@ export const fetchClassList = async () => {
       'fields.summary',
     ].join(','),
     limit: 500,
-    order: 'sys.createdAt',
+    order: 'fields.time',
   });
 
   return result.items.map((item) => ({
