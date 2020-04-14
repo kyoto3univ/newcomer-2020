@@ -5,6 +5,7 @@ import React from 'react';
 import Select, { OptionsType, ValueType } from 'react-select';
 import styled from 'styled-components';
 import { fetchClassList } from '../../api/contentful/class';
+import { Button } from '../../components/Button';
 import { ClassList } from '../../components/class/ClassList';
 import { Container } from '../../components/Container';
 import { Ogp } from '../../components/Ogp';
@@ -184,6 +185,12 @@ export default ({ classes, hours, tags }: Props) => {
           <p>
             ・卒業認定に必要な単位数が、科目分類ごとに指定されている大学もあります。(科目分類例：人と自然、人と文化、人と社会etc…)
           </p>
+          <p>
+            ・まだ感想がない授業や少ない授業も多くあります。皆さんからの情報が新入生の頼りです！以下のボタンから投稿できますので、皆さんの投稿をお待ちしています
+          </p>
+          <Button href='https://forms.gle/Vxdpbo7XcwvybzqC7' target='_blank'>
+            新しく感想を書く
+          </Button>
         </section>
         <section>
           <SectionTitle>授業一覧</SectionTitle>
