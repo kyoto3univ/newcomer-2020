@@ -22,6 +22,12 @@ export const theme = {
     hourColor: '#fff',
     hourBgColor: '#777',
   },
+  button: {
+    color: '#fff',
+    bgColor: '#16add0',
+    hoverBgColor: '#0f94b3',
+    hoverBorderColor: '#1abbe0',
+  },
 } as const;
 
 type AppTheme = typeof theme;

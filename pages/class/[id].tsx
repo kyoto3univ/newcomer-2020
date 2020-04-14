@@ -2,6 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import styled from 'styled-components';
 import { fetchClass, fetchClassList } from '../../api/contentful/class';
+import { Button } from '../../components/Button';
 import { CategoryList } from '../../components/CategoryList';
 import { ClassTitle } from '../../components/class/ClassTitle';
 import {
@@ -26,6 +27,9 @@ const CollapseTitle = styled.h4`
 `;
 const CollapseContent = styled(PreWrapP)`
   margin-top: 0;
+`;
+const NewPostButton = styled(Button)`
+  margin-top: 1em;
 `;
 type Props = {
   classInfo: ExtractPromise<ReturnType<typeof fetchClass>>;
@@ -72,6 +76,12 @@ export default ({ classInfo }: Props) => {
               <ReactionCard content={content} key={id} />
             ))}
           </ReactionCardContainer>
+          <NewPostButton
+            href='https://forms.gle/Vxdpbo7XcwvybzqC7'
+            target='_blank'
+          >
+            新しく感想を書く
+          </NewPostButton>
         </section>
       </Container>
     </>
