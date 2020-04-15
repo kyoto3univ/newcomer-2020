@@ -26,7 +26,7 @@ export default () => {
         <SectionTitle sakura>新入生向け情報をチェック!</SectionTitle>
         <ContentCardContainer>
           <ContentCard
-            title='部活・サークル紹介'
+            title='KITサークル紹介'
             description='京都工芸繊維大学のサークル・部活動や他大学のインカレサークルを紹介します'
             link='/club-circle'
           />
