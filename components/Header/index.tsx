@@ -75,6 +75,20 @@ const PWABack = styled.span`
   cursor: pointer;
 `;
 
+const SubLinkContainer = styled.div`
+  margin-left: auto;
+`;
+
+const SubLink = styled.a`
+  margin: 0 0.5em;
+  text-decoration: none;
+  line-height: 60px;
+  color: ${({ theme }) => theme.header.linkColor};
+
+  @media screen and (max-width: 520px) {
+    line-height: 50px;
+  }
+`;
 export const Header = () => {
   const { pathname, back } = useRouter();
   const isPWA = React.useMemo(() => {
@@ -95,6 +109,14 @@ export const Header = () => {
             {pathname !== '/' && !isPWA && <SpTitle>TOPに戻る</SpTitle>}
           </HeaderLink>
         </Link>
+        <SubLinkContainer>
+          <Link href='/club-circle' passHref>
+            <SubLink>サークル紹介</SubLink>
+          </Link>
+          <Link href='/class' passHref>
+            <SubLink>授業紹介</SubLink>
+          </Link>
+        </SubLinkContainer>
       </HeaderInnerContainer>
       <style jsx global>
         {`
