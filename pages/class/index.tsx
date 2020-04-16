@@ -30,8 +30,10 @@ const SelectContainer = styled.div`
   .hour {
     min-width: 8em;
   }
-  .tags {
+  .tags,
+  .type {
     flex-grow: 1;
+    min-width: 13em;
   }
 `;
 
@@ -44,6 +46,7 @@ type Props = {
   classes: ExtractPromise<ReturnType<typeof fetchClassList>>;
   hours: Array<{ day: string; time: number }>;
   tags: string[];
+  types: string[];
 };
 type TimeOptionType = {
   label: string;
@@ -53,13 +56,18 @@ type TagsOptionType = {
   label: string;
   value: string;
 };
-export default ({ classes, hours, tags }: Props) => {
+type TypeOptionType = {
+  label: string;
+  value: string;
+};
+export default ({ classes, hours, tags, types }: Props) => {
   const router = useRouter();
   const [hourFilter, setHourFilter] = React.useState<{
     day: string;
     time: number;
   } | null>(null);
   const [tagFilter, setTagFilter] = React.useState<string[]>([]);
+  const [typeFilter, setTypeFilter] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     const asPath = decodeURIComponent(router.asPath);
@@ -73,17 +81,27 @@ export default ({ classes, hours, tags }: Props) => {
       const filter = RegExp.$1?.split(',') || [];
       setTagFilter(filter.filter((item) => tags.includes(item)));
     }
+    if (asPath.match(/[#&]type=(.+)/g)) {
+      const filter = RegExp.$1;
+      if (types.includes(filter)) {
+        setTypeFilter(filter);
+      } else {
+        setTypeFilter(null);
+      }
+    }
   }, [router, router.asPath]);
 
   const filteredClasses = React.useMemo(() => {
-    if (!hourFilter && tagFilter.length === 0) return classes;
+    if (!hourFilter && tagFilter.length === 0 && !typeFilter) return classes;
 
     return classes.filter(
-      ({ day, time, tags }) =>
+      ({ day, time, tags, type }) =>
         (!hourFilter || (day === hourFilter.day && time === hourFilter.time)) &&
-        (tagFilter.length === 0 || tagFilter.some((tag) => tags.includes(tag))),
+        (tagFilter.length === 0 ||
+          tagFilter.some((tag) => tags.includes(tag))) &&
+        (typeFilter === null || type === typeFilter),
     );
-  }, [hourFilter, tagFilter]);
+  }, [hourFilter, tagFilter, typeFilter]);
 
   const hourSelectOptions: OptionsType<TimeOptionType> = hours.map((hour) => ({
     value: hour,
@@ -93,6 +111,11 @@ export default ({ classes, hours, tags }: Props) => {
   const tagSelectOptions: OptionsType<TagsOptionType> = tags.map((tag) => ({
     value: tag,
     label: tag,
+  }));
+
+  const typeSelectOptions: OptionsType<TypeOptionType> = types.map((type) => ({
+    value: type,
+    label: type,
   }));
 
   const hourSelectedOptions: TimeOptionType | null = hourFilter
@@ -109,6 +132,25 @@ export default ({ classes, hours, tags }: Props) => {
     }),
   );
 
+  const typeSelectedOptions: TypeOptionType | null = typeFilter
+    ? {
+        value: typeFilter,
+        label: typeFilter,
+      }
+    : null;
+
+  React.useEffect(() => {
+    const params: string[] = [];
+    if (hourFilter !== null)
+      params.push(`filter=${hourFilter.day}-${hourFilter.time}`);
+    if (typeFilter !== null) params.push(`type=${typeFilter}`);
+    if (tagFilter.length !== 0) params.push(`tags=${tagFilter.join(',')}`);
+    router.replace({
+      pathname: router.pathname,
+      hash: params.join('&') || null,
+    });
+  }, [hourFilter, tagFilter, typeFilter]);
+
   const handleHourSelectChange = React.useCallback(
     (options: ValueType<TimeOptionType>) => {
       // if (options) setCategoryFilter([(options as OptionType).value]);
@@ -116,15 +158,9 @@ export default ({ classes, hours, tags }: Props) => {
         const filter = (options as TimeOptionType).value;
 
         setHourFilter(filter);
-        router.replace({
-          pathname: router.pathname,
-          hash: `filter=${filter.day}-${filter.time}&tags=${tagFilter.join(
-            ',',
-          )}`,
-        });
       }
     },
-    [router.pathname],
+    [setHourFilter],
   );
 
   const handleTagSelectChange = React.useCallback(
@@ -136,32 +172,33 @@ export default ({ classes, hours, tags }: Props) => {
         );
 
         setTagFilter(filter);
-        router.replace({
-          pathname: router.pathname,
-          hash: hourFilter
-            ? `filter=${hourFilter.day}-${hourFilter.time}&tags=${filter.join(
-                ',',
-              )}`
-            : `tags=${filter.join(',')}`,
-        });
       }
     },
-    [router.pathname],
+    [setTagFilter],
+  );
+
+  const handleTypeSelectChange = React.useCallback(
+    (options: ValueType<TypeOptionType>) => {
+      // if (options) setCategoryFilter([(options as OptionType).value]);
+      if (options) {
+        const filter = (options as TypeOptionType).value;
+
+        setTypeFilter(filter);
+      }
+    },
+    [setTypeFilter],
   );
 
   const handleClearFilter = React.useCallback(
     (e: React.SyntheticEvent) => {
       setHourFilter(null);
       setTagFilter([]);
-      router.replace({
-        pathname: router.pathname,
-        hash: null,
-      });
+      setTypeFilter(null);
       e.preventDefault();
 
       return false;
     },
-    [setHourFilter],
+    [setHourFilter, setTagFilter, setTypeFilter],
   );
   return (
     <>
@@ -211,8 +248,15 @@ export default ({ classes, hours, tags }: Props) => {
                 isMulti
                 className='tags'
               />
+              <Select
+                options={typeSelectOptions}
+                onChange={handleTypeSelectChange}
+                value={typeSelectedOptions}
+                placeholder='大学で絞り込み'
+                className='type'
+              />
             </SelectContainer>
-            {(hourFilter || tagFilter.length > 0) && (
+            {(hourFilter || tagFilter.length > 0 || typeFilter) && (
               <ClearLink onClick={handleClearFilter} href='#'>
                 絞り込み解除
               </ClearLink>
@@ -250,6 +294,18 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
               }),
               obj,
             ),
+          {},
+        ),
+      ),
+      types: Object.keys(
+        classes.reduce<Record<string, number>>(
+          (obj, { type }) =>
+            type
+              ? {
+                  ...obj,
+                  [type]: 1,
+                }
+              : obj,
           {},
         ),
       ),
