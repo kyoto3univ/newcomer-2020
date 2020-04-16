@@ -239,6 +239,7 @@ export default ({ classes, hours, tags, types }: Props) => {
                 value={hourSelectedOptions}
                 placeholder='時限'
                 className='hour'
+                isSearchable={false}
               />
               <Select
                 options={tagSelectOptions}
@@ -247,6 +248,7 @@ export default ({ classes, hours, tags, types }: Props) => {
                 placeholder='科目分類で絞り込み'
                 isMulti
                 className='tags'
+                isSearchable={false}
               />
               <Select
                 options={typeSelectOptions}
@@ -254,6 +256,7 @@ export default ({ classes, hours, tags, types }: Props) => {
                 value={typeSelectedOptions}
                 placeholder='大学で絞り込み'
                 className='type'
+                isSearchable={false}
               />
             </SelectContainer>
             {(hourFilter || tagFilter.length > 0 || typeFilter) && (
