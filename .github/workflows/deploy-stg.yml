@@ -1,9 +1,9 @@
-name: Staging Deploy (master env with preview mode)
+name: Staging Deploy (master env with preview mode, on master branch)
 
 on:
   push:
     branches:
-      - production
+      - master
   repository_dispatch:
     types: [deploy_stg]
   schedule:
@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: production
+          ref: master
 
       - name: Setup Node
         uses: actions/setup-node@v1
