@@ -1,7 +1,23 @@
 import React from 'react';
 import YouTube from 'react-youtube';
+import styled from 'styled-components';
 
-export const ClubTopImageYouTube = ({ youtube }: { youtube: string }) => {
+const Container = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .yt {
+    width: 85%;
+  }
+
+  @media screen and (max-width: 520px) {
+    .yt {
+      width: 100%;
+    }
+  }
+`;
+export const ClubYouTube = ({ youtube }: { youtube: string }) => {
   const ytInitialHeight = React.useMemo(
     () =>
       process.browser && document.body.clientWidth < 520
@@ -38,16 +54,18 @@ export const ClubTopImageYouTube = ({ youtube }: { youtube: string }) => {
     return null;
   }, [youtube]);
   return ytOpts ? (
-    <YouTube
-      videoId={ytOpts.videoId}
-      containerClassName='yt'
-      opts={{
-        height: `${ytInitialHeight}`,
-        playerVars: {
-          rel: 0,
-          ...ytOpts.playerVars,
-        },
-      }}
-    />
+    <Container>
+      <YouTube
+        videoId={ytOpts.videoId}
+        containerClassName='yt'
+        opts={{
+          height: `${ytInitialHeight}`,
+          playerVars: {
+            rel: 0,
+            ...ytOpts.playerVars,
+          },
+        }}
+      />
+    </Container>
   ) : null;
 };

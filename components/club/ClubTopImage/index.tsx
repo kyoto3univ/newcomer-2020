@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ClubYouTube } from '../ClubYouTube';
 import { ClubTopImageImg } from './image';
-import { ClubTopImageYouTube } from './youtube';
 
 const Container = styled.div`
   width: 100%;
@@ -45,14 +45,6 @@ export const ClubTopImage = ({
   imageAlt,
   imageMeta,
 }: Props) => {
-  if (youtube) {
-    return (
-      <Container>
-        <ClubTopImageYouTube youtube={youtube} />
-      </Container>
-    );
-  }
-
   if (image) {
     return (
       <Container>
@@ -61,6 +53,14 @@ export const ClubTopImage = ({
           imageAlt={imageAlt}
           imageMeta={imageMeta}
         />
+      </Container>
+    );
+  }
+
+  if (youtube) {
+    return (
+      <Container>
+        <ClubYouTube youtube={youtube} />
       </Container>
     );
   }

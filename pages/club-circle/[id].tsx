@@ -6,6 +6,7 @@ import { AutoLink } from '../../components/AutoLink';
 import { CategoryList } from '../../components/CategoryList';
 import { ClubImages } from '../../components/club/ClubImages';
 import { ClubTopImage } from '../../components/club/ClubTopImage';
+import { ClubYouTube } from '../../components/club/ClubYouTube';
 import { Container } from '../../components/Container';
 import { Dl } from '../../components/DescriptionList';
 import { Ogp } from '../../components/Ogp';
@@ -85,6 +86,9 @@ export default ({ club }: Props) => {
             </>
           )}
         </Dl>
+        {club.youtubeId && club.largeImage && (
+          <ClubYouTube youtube={club.youtubeId} />
+        )}
         <ClubImages images={club.images} />
       </Container>
     </>
