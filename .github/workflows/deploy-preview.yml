@@ -5,9 +5,9 @@ on:
     branches:
       - master
   repository_dispatch:
-    types: [deploy_stg]
+    types: [deploy_preview]
   schedule:
-    - cron:  '0 */6 * * *'
+    - cron:  '0 */1 * * *'
 
 jobs:
   deploy:
@@ -17,6 +17,7 @@ jobs:
       ACCESS_TOKEN: ${{ secrets.CONTENTFUL_TOKEN_PREVIEW }}
       SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
       CONTENTFUL_HOST: preview.contentful.com
+      PREVIEW_MODE: 'true'
     steps:
       - uses: actions/checkout@v2
         with:
@@ -49,5 +50,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out
-          publish_branch: stg-pages
+          publish_branch: preview-pages
           force_orphan: true

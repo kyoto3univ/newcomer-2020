@@ -144,8 +144,8 @@ export default ({ clubs, categories }: Props) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const clubs = await fetchClubList();
-  const categories = await fetchCategories();
+  const clubs = process.env.PREVIEW_MODE ? [] : await fetchClubList();
+  const categories = process.env.PREVIEW_MODE ? [] : await fetchCategories();
 
   return {
     props: {

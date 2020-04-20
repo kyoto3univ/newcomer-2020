@@ -273,7 +273,7 @@ export default ({ classes, hours, tags, types }: Props) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const classes = await fetchClassList();
+  const classes = process.env.PREVIEW_MODE ? [] : await fetchClassList();
 
   return {
     props: {
