@@ -10,6 +10,9 @@ const Container = styled.div`
   .yt {
     width: 85%;
   }
+  iframe {
+    width: 100%;
+  }
 
   @media screen and (max-width: 520px) {
     .yt {
