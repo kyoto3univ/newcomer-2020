@@ -12,6 +12,7 @@ import { Dl } from '../../components/DescriptionList';
 import { Ogp } from '../../components/Ogp';
 import { PreWrapP } from '../../components/PreWrapP';
 import { SectionTitle } from '../../components/SectionTitle';
+import { TextAutoLink } from '../../components/TextAutoLink';
 import { ExtractPromise } from '../../utils/return-type';
 
 const ClubLink = styled.a`
@@ -57,9 +58,13 @@ export default ({ club }: Props) => {
             </>
           )}
           <dt>入部方法</dt>
-          <dd>{club.howToJoin}</dd>
+          <dd>
+            <TextAutoLink content={club.howToJoin} />
+          </dd>
         </Dl>
-        <PreWrapP>{club.description}</PreWrapP>
+        <PreWrapP>
+          <TextAutoLink content={club.description} />
+        </PreWrapP>
         <Dl>
           {club.files.length > 0 && (
             <>
