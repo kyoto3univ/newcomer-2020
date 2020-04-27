@@ -37,14 +37,27 @@ const Time = styled.time`
   white-space: nowrap;
 `;
 
+const Orgs = styled.span`
+  font-size: 0.9em;
+  color: ${({ theme }) => theme.event.orgsColor};
+  background-color: ${({ theme }) => theme.event.orgsBgColor};
+  line-height: 1.25em;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 1px 0.2em;
+  margin-right: 0.4em;
+`;
+
 export const ClubEventItem = ({
   id,
   title,
   date,
+  orgs,
 }: {
   id: string;
   title: string;
   date: string;
+  orgs: string | null;
 }) => {
   const dateTimeString = React.useMemo(() => {
     const dt = DateTime.fromISO(date);
@@ -65,7 +78,10 @@ export const ClubEventItem = ({
       passHref
     >
       <Container>
-        <Title>{title}</Title>
+        <Title>
+          {orgs && <Orgs>{orgs}</Orgs>}
+          {title}
+        </Title>
         <Time>{dateTimeString}</Time>
       </Container>
     </Link>

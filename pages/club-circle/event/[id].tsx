@@ -41,10 +41,12 @@ export default ({ eventInfo }: Props) => {
   return (
     <>
       <Head>
-        <title>{eventInfo.title} - 部活動イベント情報</title>
+        <title>
+          {eventInfo.title} ({eventInfo.orgs}) - 部活動イベント情報
+        </title>
       </Head>
       <Ogp
-        title={`${eventInfo.title} - 部活動イベント情報`}
+        title={`${eventInfo.title} (${eventInfo.orgs}) - 部活動イベント情報`}
         description={eventInfo.content.slice(0, 80)}
       />
       <Container>

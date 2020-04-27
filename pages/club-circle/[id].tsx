@@ -71,7 +71,7 @@ export default ({ club }: Props) => {
             <b>新歓イベント情報</b>
             <div>
               {club.events.map((event) => (
-                <ClubEventItem {...event} key={event.id} />
+                <ClubEventItem {...event} orgs={null} key={event.id} />
               ))}
             </div>
           </>

@@ -28,7 +28,7 @@ export const fetchEvent = async (id: string) => {
 export const fetchEventList = async () => {
   const events = await client.getEntries<EventInfo>({
     content_type: 'EventInfo',
-    select: ['sys.id', 'fields.title', 'fields.orgs'].join(','),
+    select: ['sys.id', 'fields.title', 'fields.orgs', 'fields.date'].join(','),
     limit: 500,
     order: 'sys.createdAt',
   });
@@ -36,6 +36,7 @@ export const fetchEventList = async () => {
   return events.items.map((event) => ({
     id: event.sys.id,
     title: event.fields.title,
+    date: event.fields.date,
     orgs: event.fields.orgs || '',
   }));
 };

@@ -26,11 +26,11 @@ module.exports = function (migration) {
     .name("団体名")
     .type("Symbol")
     .localized(false)
-    .required(false)
+    .required(true)
     .validations([
       {
         size: {
-          max: 24,
+          max: 16,
         },
       },
     ])
