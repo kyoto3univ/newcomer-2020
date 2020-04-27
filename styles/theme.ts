@@ -14,6 +14,10 @@ export const theme = {
     titleColor: '#0f94b3',
     textColor: '#212529',
   },
+  event: {
+    orgsColor: '#fff',
+    orgsBgColor: '#777',
+  },
   club: {
     cardTitleColor: '#0f94b3',
     cardTextColor: '#212529',

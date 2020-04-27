@@ -16,7 +16,11 @@ export const fetchEvent = async (id: string) => {
     title: event.fields.title,
     date: event.fields.date,
     content: event.fields.content,
-    images: event.fields.images?.map((image) => image.fields.file.url),
+    images:
+      event.fields.images?.map((image) => ({
+        url: image.fields.file.url,
+        title: image.fields.title || '',
+      })) || [],
     orgs: event.fields.orgs || '',
   };
 };

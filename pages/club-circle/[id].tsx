@@ -66,12 +66,16 @@ export default ({ club }: Props) => {
         <PreWrapP>
           <TextAutoLink content={club.description} />
         </PreWrapP>
-        <b>新歓イベント情報</b>
-        <div>
-          {club.events.map((event) => (
-            <ClubEventItem {...event} key={event.id} />
-          ))}
-        </div>
+        {club.events.length > 0 && (
+          <>
+            <b>新歓イベント情報</b>
+            <div>
+              {club.events.map((event) => (
+                <ClubEventItem {...event} key={event.id} />
+              ))}
+            </div>
+          </>
+        )}
         <Dl>
           {club.files.length > 0 && (
             <>
