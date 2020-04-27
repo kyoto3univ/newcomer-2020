@@ -49,26 +49,35 @@ module.exports = function (migration) {
     .omitted(false);
 
   classInfo
+    .createField("tags")
+    .name("タグ")
+    .type("Array")
+    .localized(false)
+    .required(false)
+    .validations([])
+    .disabled(false)
+    .omitted(false)
+    .items({
+      type: "Symbol",
+      validations: [],
+    });
+
+  classInfo
     .createField("type")
-    .name("授業種別(一般教養/専門など)")
+    .name("授業種別(大学名)")
     .type("Symbol")
     .localized(false)
     .required(false)
     .validations([
       {
-        in: ["三大学合同", "教養科目", "選択必修等"],
+        in: [
+          "三大学合同",
+          "京都府立医科大学",
+          "京都工芸繊維大学",
+          "京都府立大学",
+        ],
       },
     ])
-    .disabled(false)
-    .omitted(false);
-
-  classInfo
-    .createField("newClass")
-    .name("新規授業(KIT生にとって)")
-    .type("Boolean")
-    .localized(false)
-    .required(true)
-    .validations([])
     .disabled(false)
     .omitted(false);
 
@@ -148,28 +157,6 @@ module.exports = function (migration) {
     .omitted(false);
 
   classInfo
-    .createField("officialUrl")
-    .name("公式シラバスURL")
-    .type("Array")
-    .localized(false)
-    .required(false)
-    .validations([])
-    .disabled(false)
-    .omitted(false)
-    .items({
-      type: "Symbol",
-
-      validations: [
-        {
-          regexp: {
-            pattern:
-              "^(ftp|http|https):\\/\\/(\\w+:{0,1}\\w*@)?(\\S+)(:[0-9]+)?(\\/|\\/([\\w#!:.?+=&%@!\\-/]))?$",
-          },
-        },
-      ],
-    });
-
-  classInfo
     .createField("reactions")
     .name("感想")
     .type("Array")
@@ -197,12 +184,8 @@ module.exports = function (migration) {
     helpText: "7はその他",
   });
 
+  classInfo.changeFieldControl("tags", "builtin", "tagEditor", {});
   classInfo.changeFieldControl("type", "builtin", "dropdown", {});
-
-  classInfo.changeFieldControl("newClass", "builtin", "boolean", {
-    trueLabel: "Yes",
-    falseLabel: "No",
-  });
 
   classInfo.changeFieldControl("summary", "builtin", "singleLine", {
     helpText:
@@ -214,7 +197,6 @@ module.exports = function (migration) {
   classInfo.changeFieldControl("textbook", "builtin", "singleLine", {});
   classInfo.changeFieldControl("evaluation", "builtin", "multipleLine", {});
   classInfo.changeFieldControl("notes", "builtin", "multipleLine", {});
-  classInfo.changeFieldControl("officialUrl", "builtin", "tagEditor", {});
 
   classInfo.changeFieldControl("reactions", "builtin", "entryLinksEditor", {
     bulkEditing: false,
