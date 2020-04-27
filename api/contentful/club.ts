@@ -1,5 +1,6 @@
 import { Asset, Entry } from 'contentful';
 import { client } from './client';
+import { EventInfo } from './event';
 
 type Category = {
   name: string;
@@ -21,6 +22,7 @@ type ClubInfo = {
   univ: string[];
   files: Asset[];
   images: Asset[];
+  events?: Array<Entry<EventInfo>>;
 };
 
 export const fetchClubList = async () => {
@@ -90,6 +92,14 @@ export const fetchClub = async (id: string) => {
         url: file.fields.file.url,
         width: file.fields.file.details.image?.width || 0,
         height: file.fields.file.details.image?.height || 0,
+      })) || [],
+    events:
+      result.fields.events?.map((event) => ({
+        id: event.sys.id,
+        title: event.fields.title,
+        date: event.fields.date,
+        content: event.fields.content,
+        images: event.fields.images?.map((image) => image.fields.file.url),
       })) || [],
   };
 };

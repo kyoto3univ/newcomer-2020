@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { fetchClub, fetchClubList } from '../../api/contentful';
 import { AutoLink } from '../../components/AutoLink';
 import { CategoryList } from '../../components/CategoryList';
+import { ClubEventItem } from '../../components/club/ClubEventItem';
 import { ClubImages } from '../../components/club/ClubImages';
 import { ClubTopImage } from '../../components/club/ClubTopImage';
 import { ClubYouTube } from '../../components/club/ClubYouTube';
@@ -65,6 +66,12 @@ export default ({ club }: Props) => {
         <PreWrapP>
           <TextAutoLink content={club.description} />
         </PreWrapP>
+        <b>新歓イベント情報</b>
+        <div>
+          {club.events.map((event) => (
+            <ClubEventItem {...event} key={event.id} />
+          ))}
+        </div>
         <Dl>
           {club.files.length > 0 && (
             <>
