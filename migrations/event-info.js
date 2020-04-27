@@ -22,6 +22,22 @@ module.exports = function (migration) {
     .omitted(false);
 
   eventInfo
+    .createField("orgs")
+    .name("団体名")
+    .type("Symbol")
+    .localized(false)
+    .required(false)
+    .validations([
+      {
+        size: {
+          max: 24,
+        },
+      },
+    ])
+    .disabled(false)
+    .omitted(false);
+
+  eventInfo
     .createField("date")
     .name("日時")
     .type("Date")
@@ -62,6 +78,7 @@ module.exports = function (migration) {
     });
 
   eventInfo.changeFieldControl("title", "builtin", "singleLine", {});
+  eventInfo.changeFieldControl("orgs", "builtin", "singleLine", {});
 
   eventInfo.changeFieldControl("date", "builtin", "datePicker", {
     ampm: "24",
