@@ -54,7 +54,7 @@ export const ClubEventItem = ({
     if (dayDiffHour < 12) {
       return `${dayDiffHour}時間後`;
     } else {
-      return dt.toFormat('MM/dd HH:mm～');
+      return dt.toFormat('MM/dd(EEE) HH:mm～');
     }
   }, [date]);
 

@@ -35,7 +35,7 @@ type Props = {
 
 export default ({ eventInfo }: Props) => {
   const dateTimeString = React.useMemo(() => {
-    return DateTime.fromISO(eventInfo.date).toFormat('yyyy/MM/dd(MMM) HH:mm～');
+    return DateTime.fromISO(eventInfo.date).toFormat('yyyy/MM/dd(EEE) HH:mm～');
   }, [eventInfo.date]);
 
   return (
