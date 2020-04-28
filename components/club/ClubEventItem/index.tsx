@@ -29,6 +29,7 @@ const Title = styled.h4`
   font-size: 1.3em;
   color: ${({ theme }) => theme.club.cardTitleColor};
   line-height: 1.3em;
+  word-break: break-all;
 `;
 
 const Time = styled.time`
@@ -64,8 +65,10 @@ export const ClubEventItem = ({
     const today = DateTime.local();
 
     const dayDiffHour = dt.diff(today).as('hour');
-    if (dayDiffHour < 12) {
-      return `${dayDiffHour}時間後`;
+    if (dayDiffHour < 0) {
+      return '開催済み';
+    } else if (dayDiffHour < 12) {
+      return `${Math.floor(dayDiffHour)}時間後`;
     } else {
       return dt.toFormat('MM/dd(EEE) HH:mm～');
     }
