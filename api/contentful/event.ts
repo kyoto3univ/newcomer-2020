@@ -30,7 +30,7 @@ export const fetchEventList = async () => {
     content_type: 'EventInfo',
     select: ['sys.id', 'fields.title', 'fields.orgs', 'fields.date'].join(','),
     limit: 500,
-    order: 'sys.createdAt',
+    order: '-fields.date',
   });
 
   return events.items.map((event) => ({
