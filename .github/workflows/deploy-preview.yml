@@ -1,4 +1,4 @@
-name: Staging Deploy (master env with preview mode, on master branch)
+name: Preview Deploy
 
 on:
   push:
