@@ -41,9 +41,11 @@ export default ({ events }: Props) => {
           {'ぜひ参加しましょう！'}
         </p>
         <div>
-          {events.map((event) => (
-            <ClubEventItem {...event} key={event.id} />
-          ))}
+          {events.length > 0 ? (
+            events.map((event) => <ClubEventItem {...event} key={event.id} />)
+          ) : (
+            <b>まだ登録されたイベントがありません</b>
+          )}
         </div>
       </Container>
     </>

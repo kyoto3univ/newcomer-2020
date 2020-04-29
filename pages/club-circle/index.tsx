@@ -1,10 +1,12 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import Select, { OptionsType, ValueType } from 'react-select';
 import styled from 'styled-components';
 import { fetchCategories, fetchClubList } from '../../api/contentful';
+import { Button } from '../../components/Button';
 import { ClubCard } from '../../components/club/ClubCard';
 import { Container } from '../../components/Container';
 import { Ogp } from '../../components/Ogp';
@@ -108,6 +110,19 @@ export default ({ clubs, categories }: Props) => {
       />
       <Container>
         <SectionTitle>クラブ・サークル紹介</SectionTitle>
+        <p>
+          {'このページでは大学などに公認されている団体を掲載しています。'}
+          {
+            '活動内容やカテゴリをタグとしてまとめているので、お好みの団体を素早く探すことができます。'
+          }
+          {
+            'また新歓の活動（オンライン）も掲載しているので、ぜひ参加してみてください！'
+          }
+          <br />
+          <Link href='/club-circle/event/' passHref>
+            <Button>新歓イベントの一覧を見る</Button>
+          </Link>
+        </p>
         <FilterContainer>
           <SelectContainer>
             <Select
