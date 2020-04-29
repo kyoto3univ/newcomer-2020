@@ -56,7 +56,7 @@ export const fetchClass = async (id: string) => {
     title: result.fields.title,
     time: result.fields.time,
     day: result.fields.day,
-    type: result.fields.type || null,
+    type: result.fields.type || '',
     summary: result.fields.summary || '',
     teachers: result.fields.teachers || [],
     comment: result.fields.comment || null,

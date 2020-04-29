@@ -16,15 +16,18 @@ export const ClassTitle = ({
   day,
   time,
   title,
+  type,
 }: {
   day: string;
   time: number;
   title: string;
+  type: string;
 }) => {
   return (
     <SectionTitle>
       {`${title} `}
       <Hour>{`${day}曜${time}限`}</Hour>
+      {type && <Hour>{type}</Hour>}
     </SectionTitle>
   );
 };

@@ -111,7 +111,7 @@ module.exports = function (migration) {
 
   circleInfo
     .createField("movieUrl")
-    .name("詳細見出し用YouTube")
+    .name("YouTubeリンク")
     .type("Symbol")
     .localized(false)
     .required(false)
@@ -147,7 +147,7 @@ module.exports = function (migration) {
     .omitted(false);
   circleInfo
     .createField("contactPrivate")
-    .name("担当者アドレス")
+    .name("担当者アドレス（非公開）")
     .type("Symbol")
     .localized(false)
     .required(false)
@@ -269,9 +269,32 @@ module.exports = function (migration) {
       ],
     });
 
+  circleInfo
+    .createField("events")
+    .name("イベント情報")
+    .type("Array")
+    .localized(false)
+    .required(false)
+    .validations([])
+    .disabled(false)
+    .omitted(false)
+    .items({
+      type: "Link",
+
+      validations: [
+        {
+          linkContentType: ["EventInfo"],
+        },
+      ],
+
+      linkType: "Entry",
+    });
+
   circleInfo.changeFieldControl("name", "builtin", "singleLine", {});
 
   circleInfo.changeFieldControl("category", "builtin", "entryLinksEditor", {
+    helpText:
+      "「Link existing entry」から登録する。重複して登録しないように注意してください。",
     bulkEditing: false,
   });
 
@@ -284,20 +307,32 @@ module.exports = function (migration) {
   );
 
   circleInfo.changeFieldControl("largeImage", "builtin", "assetLinkEditor", {
-    helpText: "詳細用の大きな画像です。横長が好ましい",
+    helpText: "詳細用の大きな画像です。横長が好ましい。",
   });
 
-  circleInfo.changeFieldControl("movieUrl", "builtin", "urlEditor", {});
+  circleInfo.changeFieldControl("movieUrl", "builtin", "urlEditor", {
+    helpText:
+      "youtu.be形式のURLを入力。見出し用画像がセットされていない場合は見出しとして利用されます",
+  });
+
   circleInfo.changeFieldControl("locationAndTime", "builtin", "singleLine", {});
   circleInfo.changeFieldControl("contactUrl", "builtin", "singleLine", {});
-  circleInfo.changeFieldControl("contactPrivate", "builtin", "singleLine", {});
+
+  circleInfo.changeFieldControl("contactPrivate", "builtin", "singleLine", {
+    helpText: "この項目は公開されません",
+  });
+
   circleInfo.changeFieldControl("howToJoin", "builtin", "singleLine", {});
   circleInfo.changeFieldControl("univ", "builtin", "dropdown", {});
   circleInfo.changeFieldControl("images", "builtin", "assetLinksEditor", {});
   circleInfo.changeFieldControl("description", "builtin", "multipleLine", {});
   circleInfo.changeFieldControl("files", "builtin", "assetLinksEditor", {});
 
-  circleInfo.changeFieldControl("urls", "builtin", "listInput", {
-    helpText: "Insert comma separated values",
+  circleInfo.changeFieldControl("urls", "builtin", "tagEditor", {
+    helpText: "URLを入力しEnterで確定、複数追加できます",
+  });
+
+  circleInfo.changeFieldControl("events", "builtin", "entryLinksEditor", {
+    bulkEditing: false,
   });
 };

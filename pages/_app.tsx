@@ -1,3 +1,4 @@
+import { Settings } from 'luxon';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import Router from 'next/router';
@@ -26,6 +27,7 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 `;
+Settings.defaultLocale = 'ja';
 export default ({ Component, pageProps }: AppProps) => {
   return (
     <ThemeProvider theme={theme}>
