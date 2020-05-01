@@ -5,26 +5,38 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  @media screen and (max-width: 520px) {
-    flex-direction: column;
-  }
 `;
 const PageLinkBase = styled.a`
   max-width: 35%;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  position: relative;
   @media screen and (max-width: 520px) {
     padding-top: 0.3em;
     max-width: 100%;
   }
+  ::before,
+  ::after {
+    position: absolute;
+  }
 `;
 const PrevPageLink = styled(PageLinkBase)`
   text-align: left;
+  padding-left: 0.8em;
+  ::before {
+    content: '«';
+    left: 0;
+  }
 `;
 const NextPageLink = styled(PageLinkBase)`
   text-align: right;
-  align-self: right;
+  padding-right: 0.8em;
+  margin-left: auto;
+  ::after {
+    content: '»';
+    right: 0;
+  }
 `;
 type Props = {
   next?: {
@@ -41,15 +53,19 @@ type Props = {
 export const Pager = ({ prev, next }: Props) => {
   return (
     <Container>
-      {prev && (
+      {prev ? (
         <Link href={prev.href} as={prev.as} passHref>
-          <PrevPageLink>&laquo; {prev.title}</PrevPageLink>
+          <PrevPageLink>{prev.title}</PrevPageLink>
         </Link>
+      ) : (
+        <div />
       )}
-      {next && (
+      {next ? (
         <Link href={next.href} as={next.as} passHref>
-          <NextPageLink>{next.title} &raquo;</NextPageLink>
+          <NextPageLink>{next.title}</NextPageLink>
         </Link>
+      ) : (
+        <div />
       )}
     </Container>
   );
