@@ -1,4 +1,4 @@
-import { Asset, Entry } from 'contentful';
+import { Asset, Entry, EntryCollection } from 'contentful';
 import { client } from './client';
 import { EventInfo } from './event';
 
@@ -25,19 +25,15 @@ type ClubInfo = {
   events?: Array<Entry<EventInfo>>;
 };
 
+let clubListCache: EntryCollection<ClubInfo> | null = null;
 export const fetchClubList = async () => {
-  const result = await client.getEntries<ClubInfo>({
-    content_type: 'circleInfo',
-    select: [
-      'sys.id',
-      'fields.name',
-      'fields.category',
-      'fields.image',
-      'fields.shortDescription',
-    ].join(','),
-    limit: 500,
-    order: 'sys.createdAt',
-  });
+  const result =
+    clubListCache ||
+    (clubListCache = await client.getEntries<ClubInfo>({
+      content_type: 'circleInfo',
+      limit: 500,
+      order: 'sys.createdAt',
+    }));
 
   return result.items.map((item) => ({
     id: item.sys.id,
@@ -63,7 +59,20 @@ export const fetchCategories = async () => {
 };
 
 export const fetchClub = async (id: string) => {
-  const result = await client.getEntry<ClubInfo>(id);
+  const entries =
+    clubListCache ||
+    (clubListCache = await client.getEntries<ClubInfo>({
+      content_type: 'circleInfo',
+      limit: 500,
+      order: 'sys.createdAt',
+    }));
+
+  const targetIndex = entries.items.findIndex(({ sys }) => sys.id === id);
+  if (targetIndex === -1) {
+    throw new Error('specified id is not found');
+  }
+
+  const result = entries.items[targetIndex];
 
   return {
     id: result.sys.id,
@@ -101,5 +110,19 @@ export const fetchClub = async (id: string) => {
         content: event.fields.content,
         images: event.fields.images?.map((image) => image.fields.file.url),
       })) || [],
+    nextClub:
+      targetIndex < entries.items.length - 1
+        ? {
+            id: entries.items[targetIndex + 1].sys.id,
+            name: entries.items[targetIndex + 1].fields.name,
+          }
+        : null,
+    previousClub:
+      targetIndex > 0
+        ? {
+            id: entries.items[targetIndex - 1].sys.id,
+            name: entries.items[targetIndex - 1].fields.name,
+          }
+        : null,
   };
 };

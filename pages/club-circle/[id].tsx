@@ -11,6 +11,7 @@ import { ClubYouTube } from '../../components/club/ClubYouTube';
 import { Container } from '../../components/Container';
 import { Dl } from '../../components/DescriptionList';
 import { Ogp } from '../../components/Ogp';
+import { Pager } from '../../components/Pager';
 import { PreWrapP } from '../../components/PreWrapP';
 import { SectionTitle } from '../../components/SectionTitle';
 import { TextAutoLink } from '../../components/TextAutoLink';
@@ -39,6 +40,26 @@ export default ({ club }: Props) => {
         smallImage={club.image ? `${club.image}?h=120&w=120&fit=fill` : null}
       />
       <Container>
+        <Pager
+          prev={
+            club.previousClub
+              ? {
+                  href: '/club-circle/[id]',
+                  as: `/club-circle/${club.previousClub.id}`,
+                  title: club.previousClub.name,
+                }
+              : undefined
+          }
+          next={
+            club.nextClub
+              ? {
+                  href: '/club-circle/[id]',
+                  as: `/club-circle/${club.nextClub.id}`,
+                  title: club.nextClub.name,
+                }
+              : undefined
+          }
+        />
         <SectionTitle>{club.name}</SectionTitle>
         <ClubTopImage
           image={club.largeImage}
