@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { normalizeUrl } from '../../utils/url';
 
 type Props = {
   title: string;
@@ -32,8 +33,14 @@ export const Ogp = ({ title, description, largeImage, smallImage }: Props) => {
       <meta property='og:description' content={description} />
       {(largeImage || smallImage) && (
         <>
-          <meta property='og:image' content={largeImage || smallImage || ''} />
-          <meta name='twitter:image' content={largeImage || smallImage || ''} />
+          <meta
+            property='og:image'
+            content={normalizeUrl(largeImage || smallImage || '')}
+          />
+          <meta
+            name='twitter:image'
+            content={normalizeUrl(largeImage || smallImage || '')}
+          />
         </>
       )}
     </Head>
