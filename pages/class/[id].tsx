@@ -13,6 +13,7 @@ import { Collapse } from '../../components/Collapse';
 import { Container } from '../../components/Container';
 import { Dl } from '../../components/DescriptionList';
 import { Ogp } from '../../components/Ogp';
+import { Pager } from '../../components/Pager';
 import { PreWrapP } from '../../components/PreWrapP';
 import { ExtractPromise } from '../../utils/return-type';
 
@@ -45,6 +46,26 @@ export default ({ classInfo }: Props) => {
         />
       </Head>
       <Container>
+        <Pager
+          prev={
+            classInfo.previousClass
+              ? {
+                  href: '/class/[id]',
+                  as: `/class/${classInfo.previousClass.id}`,
+                  title: classInfo.previousClass.title,
+                }
+              : undefined
+          }
+          next={
+            classInfo.nextClass
+              ? {
+                  href: '/class/[id]',
+                  as: `/class/${classInfo.nextClass.id}`,
+                  title: classInfo.nextClass.title,
+                }
+              : undefined
+          }
+        />
         <ClassTitle {...classInfo} />
         <CategoryList data={classInfo.tags} />
         <section>

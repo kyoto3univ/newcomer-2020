@@ -1,4 +1,4 @@
-import { Entry } from 'contentful';
+import { Entry, EntryCollection } from 'contentful';
 import { client } from './client';
 
 type ClassReaction = {
@@ -21,21 +21,15 @@ type ClassInfo = {
   tags: string[];
 };
 
+let classListCache: EntryCollection<ClassInfo> | null = null;
 export const fetchClassList = async () => {
-  const result = await client.getEntries<ClassInfo>({
-    content_type: 'ClassInfo',
-    select: [
-      'sys.id',
-      'fields.title',
-      'fields.day',
-      'fields.time',
-      'fields.type',
-      'fields.summary',
-      'fields.tags',
-    ].join(','),
-    limit: 500,
-    order: 'fields.time',
-  });
+  const result =
+    classListCache ||
+    (classListCache = await client.getEntries<ClassInfo>({
+      content_type: 'ClassInfo',
+      limit: 500,
+      order: 'fields.time',
+    }));
 
   return result.items.map((item) => ({
     id: item.sys.id,
@@ -49,7 +43,20 @@ export const fetchClassList = async () => {
 };
 
 export const fetchClass = async (id: string) => {
-  const result = await client.getEntry<ClassInfo>(id);
+  const entries =
+    classListCache ||
+    (classListCache = await client.getEntries<ClassInfo>({
+      content_type: 'ClassInfo',
+      limit: 500,
+      order: 'fields.time',
+    }));
+
+  const targetIndex = entries.items.findIndex(({ sys }) => sys.id === id);
+  if (targetIndex === -1) {
+    throw new Error('specified id is not found');
+  }
+
+  const result = entries.items[targetIndex];
 
   return {
     id: result.sys.id,
@@ -70,5 +77,19 @@ export const fetchClass = async (id: string) => {
         id: sys.id,
         content: fields.content,
       })) || [],
+    nextClass:
+      targetIndex < entries.items.length - 1
+        ? {
+            id: entries.items[targetIndex + 1].sys.id,
+            title: entries.items[targetIndex + 1].fields.title,
+          }
+        : null,
+    previousClass:
+      targetIndex > 0
+        ? {
+            id: entries.items[targetIndex - 1].sys.id,
+            title: entries.items[targetIndex - 1].fields.title,
+          }
+        : null,
   };
 };
