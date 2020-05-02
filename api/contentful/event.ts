@@ -19,9 +19,9 @@ export const fetchEvent = async (id: string) => {
     images:
       event.fields.images?.map((image) => ({
         url: image.fields.file.url,
-        title: image.fields.title || '',
-      })) || [],
-    orgs: event.fields.orgs || '',
+        title: image.fields.title ?? '',
+      })) ?? [],
+    orgs: event.fields.orgs ?? '',
   };
 };
 
@@ -37,6 +37,6 @@ export const fetchEventList = async () => {
     id: event.sys.id,
     title: event.fields.title,
     date: event.fields.date,
-    orgs: event.fields.orgs || '',
+    orgs: event.fields.orgs ?? '',
   }));
 };

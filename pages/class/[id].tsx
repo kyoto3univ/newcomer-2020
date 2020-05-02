@@ -42,7 +42,7 @@ export default ({ classInfo }: Props) => {
         <title>{`${classInfo.title} - 科目紹介`}</title>
         <Ogp
           title={`${classInfo.title} - 科目紹介`}
-          description={classInfo.comment || '授業紹介'}
+          description={classInfo.comment ?? '授業紹介'}
         />
       </Head>
       <Container>
@@ -79,7 +79,7 @@ export default ({ classInfo }: Props) => {
           </Dl>
           <Dl>
             <dt>教科書</dt>
-            <dd>{classInfo.textbook || 'なし'}</dd>
+            <dd>{classInfo.textbook ?? 'なし'}</dd>
           </Dl>
         </MetaContainer>
         <Collapse

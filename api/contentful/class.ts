@@ -24,7 +24,7 @@ type ClassInfo = {
 let classListCache: EntryCollection<ClassInfo> | null = null;
 export const fetchClassList = async () => {
   const result =
-    classListCache ||
+    classListCache ??
     (classListCache = await client.getEntries<ClassInfo>({
       content_type: 'ClassInfo',
       limit: 500,
@@ -36,15 +36,15 @@ export const fetchClassList = async () => {
     title: item.fields.title,
     time: item.fields.time,
     day: item.fields.day,
-    type: item.fields.type || null,
-    summary: item.fields.summary || '',
-    tags: item.fields.tags || [],
+    type: item.fields.type ?? null,
+    summary: item.fields.summary ?? '',
+    tags: item.fields.tags ?? [],
   }));
 };
 
 export const fetchClass = async (id: string) => {
   const entries =
-    classListCache ||
+    classListCache ??
     (classListCache = await client.getEntries<ClassInfo>({
       content_type: 'ClassInfo',
       limit: 500,
@@ -63,20 +63,20 @@ export const fetchClass = async (id: string) => {
     title: result.fields.title,
     time: result.fields.time,
     day: result.fields.day,
-    type: result.fields.type || '',
-    summary: result.fields.summary || '',
-    teachers: result.fields.teachers || [],
-    comment: result.fields.comment || null,
-    textbook: result.fields.textbook || null,
-    evaluation: result.fields.evaluation || null,
-    notes: result.fields.notes || null,
-    officialUrl: result.fields.officialUrl || null,
-    tags: result.fields.tags || [],
+    type: result.fields.type ?? '',
+    summary: result.fields.summary ?? '',
+    teachers: result.fields.teachers ?? [],
+    comment: result.fields.comment ?? null,
+    textbook: result.fields.textbook ?? null,
+    evaluation: result.fields.evaluation ?? null,
+    notes: result.fields.notes ?? null,
+    officialUrl: result.fields.officialUrl ?? null,
+    tags: result.fields.tags ?? [],
     reactions:
       result.fields?.reactions?.map(({ fields, sys }) => ({
         id: sys.id,
         content: fields.content,
-      })) || [],
+      })) ?? [],
     nextClass:
       targetIndex < entries.items.length - 1
         ? {

@@ -31,15 +31,15 @@ export const Ogp = ({ title, description, largeImage, smallImage }: Props) => {
       <meta property='og:locale' content='ja' />
       <meta property='og:title' content={title} />
       <meta property='og:description' content={description} />
-      {(largeImage || smallImage) && (
+      {(largeImage ?? smallImage) && (
         <>
           <meta
             property='og:image'
-            content={normalizeUrl(largeImage || smallImage || '')}
+            content={normalizeUrl(largeImage ?? smallImage ?? '')}
           />
           <meta
             name='twitter:image'
-            content={normalizeUrl(largeImage || smallImage || '')}
+            content={normalizeUrl(largeImage ?? smallImage ?? '')}
           />
         </>
       )}
