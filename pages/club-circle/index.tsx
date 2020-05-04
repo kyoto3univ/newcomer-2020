@@ -42,7 +42,7 @@ export default ({ clubs, categories }: Props) => {
 
   React.useEffect(() => {
     if (decodeURIComponent(router.asPath).match(/#tags=(.+)/g)) {
-      const filter = RegExp.$1?.split(',') || [];
+      const filter = RegExp.$1?.split(',') ?? [];
       setCategoryFilter(filter.filter((item) => categories.includes(item)));
     }
   }, [router, router.asPath]);

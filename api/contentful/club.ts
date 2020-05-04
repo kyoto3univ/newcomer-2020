@@ -28,7 +28,7 @@ type ClubInfo = {
 let clubListCache: EntryCollection<ClubInfo> | null = null;
 export const fetchClubList = async () => {
   const result =
-    clubListCache ||
+    clubListCache ??
     (clubListCache = await client.getEntries<ClubInfo>({
       content_type: 'circleInfo',
       limit: 500,
@@ -38,10 +38,10 @@ export const fetchClubList = async () => {
   return result.items.map((item) => ({
     id: item.sys.id,
     name: item.fields.name,
-    categories: item.fields.category?.map(({ fields }) => fields.name) || [],
-    image: item.fields.image?.fields.file.url || null,
-    imageMeta: item.fields.image?.fields.file.details.image || null,
-    shortDescription: item.fields?.shortDescription || '',
+    categories: item.fields.category?.map(({ fields }) => fields.name) ?? [],
+    image: item.fields.image?.fields.file.url ?? null,
+    imageMeta: item.fields.image?.fields.file.details.image ?? null,
+    shortDescription: item.fields?.shortDescription ?? '',
   }));
 };
 
@@ -60,7 +60,7 @@ export const fetchCategories = async () => {
 
 export const fetchClub = async (id: string) => {
   const entries =
-    clubListCache ||
+    clubListCache ??
     (clubListCache = await client.getEntries<ClubInfo>({
       content_type: 'circleInfo',
       limit: 500,
@@ -77,31 +77,31 @@ export const fetchClub = async (id: string) => {
   return {
     id: result.sys.id,
     name: result.fields.name,
-    categories: result.fields.category?.map(({ fields }) => fields.name) || [],
-    image: result.fields.image?.fields.file.url || null,
-    imageMeta: result.fields.image?.fields.file.details.image || null,
-    shortDescription: result.fields?.shortDescription || '',
-    description: result.fields.description || '',
-    largeImage: result.fields.largeImage?.fields.file.url || null,
-    largeImageMeta: result.fields.largeImage?.fields.file.details.image || null,
-    largeImageAlt: result.fields.largeImage?.fields.title || '',
+    categories: result.fields.category?.map(({ fields }) => fields.name) ?? [],
+    image: result.fields.image?.fields.file.url ?? null,
+    imageMeta: result.fields.image?.fields.file.details.image ?? null,
+    shortDescription: result.fields?.shortDescription ?? '',
+    description: result.fields.description ?? '',
+    largeImage: result.fields.largeImage?.fields.file.url ?? null,
+    largeImageMeta: result.fields.largeImage?.fields.file.details.image ?? null,
+    largeImageAlt: result.fields.largeImage?.fields.title ?? '',
     youtubeId: result.fields.movieUrl ? result.fields.movieUrl : null,
     locationAndTime: result.fields.locationAndTime,
-    contactUrl: result.fields.contactUrl || null,
+    contactUrl: result.fields.contactUrl ?? null,
     howToJoin: result.fields.howToJoin,
-    urls: result.fields.urls || [],
+    urls: result.fields.urls ?? [],
     files:
       result.fields.files?.map((file) => ({
         title: file.fields.title,
         url: file.fields.file.url,
-      })) || [],
+      })) ?? [],
     images:
       result.fields.images?.map((file) => ({
         title: file.fields.title,
         url: file.fields.file.url,
-        width: file.fields.file.details.image?.width || 0,
-        height: file.fields.file.details.image?.height || 0,
-      })) || [],
+        width: file.fields.file.details.image?.width ?? 0,
+        height: file.fields.file.details.image?.height ?? 0,
+      })) ?? [],
     events:
       result.fields.events?.map((event) => ({
         id: event.sys.id,
@@ -109,7 +109,7 @@ export const fetchClub = async (id: string) => {
         date: event.fields.date,
         content: event.fields.content,
         images: event.fields.images?.map((image) => image.fields.file.url),
-      })) || [],
+      })) ?? [],
     nextClub:
       targetIndex < entries.items.length - 1
         ? {
