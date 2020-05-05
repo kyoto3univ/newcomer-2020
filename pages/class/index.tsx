@@ -207,6 +207,7 @@ export default ({ classes, hours, tags, types }: Props) => {
         <Ogp
           title={`授業の案内`}
           description={'授業の内容や感想を紹介します'}
+          smallImage='https://kit-newcomer.3univkyoto.com/images/icons/icon-512x512.png'
         />
       </Head>
       <Container>

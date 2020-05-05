@@ -36,7 +36,7 @@ export default ({ Component, pageProps }: AppProps) => {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' type='image/x-icon' href='/favicon.ico' />
         <link rel='apple-touch-icon' href='/apple-touch-icon.png' />
-        <link rel='shortcut icon' href='/images/icons/icon-72x72.png' />
+        <link rel='shortcut icon' href='/images/icons/icon-192x192.png' />
         <link rel='manifest' href='/manifest.json' />
       </Head>
       <Header />
