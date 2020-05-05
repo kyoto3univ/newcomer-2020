@@ -14,6 +14,7 @@ export default () => {
       <Ogp
         title='新入生応援サイト'
         description='このサイトでは、COVID-19の影響で新歓や初回授業を受けられなくなった新入生をサポートする情報を配信しています'
+        smallImage='https://kit-newcomer.3univkyoto.com/images/icons/icon-512x512.png'
       />
       <Container>
         <SectionTitle sakura>このサイトを作った理由</SectionTitle>

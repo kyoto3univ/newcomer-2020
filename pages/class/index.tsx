@@ -78,7 +78,7 @@ export default ({ classes, hours, tags, types }: Props) => {
       });
     }
     if (asPath.match(/[#&]tags=(.+)/g)) {
-      const filter = RegExp.$1?.split(',') || [];
+      const filter = RegExp.$1?.split(',') ?? [];
       setTagFilter(filter.filter((item) => tags.includes(item)));
     }
     if (asPath.match(/[#&]type=(.+)/g)) {
@@ -147,7 +147,7 @@ export default ({ classes, hours, tags, types }: Props) => {
     if (tagFilter.length !== 0) params.push(`tags=${tagFilter.join(',')}`);
     router.replace({
       pathname: router.pathname,
-      hash: params.join('&') || null,
+      hash: params.join('&') ?? null,
     });
   }, [hourFilter, tagFilter, typeFilter]);
 
@@ -207,6 +207,7 @@ export default ({ classes, hours, tags, types }: Props) => {
         <Ogp
           title={`授業の案内`}
           description={'授業の内容や感想を紹介します'}
+          smallImage='https://kit-newcomer.3univkyoto.com/images/icons/icon-512x512.png'
         />
       </Head>
       <Container>

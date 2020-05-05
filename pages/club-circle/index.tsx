@@ -42,7 +42,7 @@ export default ({ clubs, categories }: Props) => {
 
   React.useEffect(() => {
     if (decodeURIComponent(router.asPath).match(/#tags=(.+)/g)) {
-      const filter = RegExp.$1?.split(',') || [];
+      const filter = RegExp.$1?.split(',') ?? [];
       setCategoryFilter(filter.filter((item) => categories.includes(item)));
     }
   }, [router, router.asPath]);
@@ -107,6 +107,7 @@ export default ({ clubs, categories }: Props) => {
       <Ogp
         title='クラブ・サークル紹介'
         description='京都工芸繊維大学のサークル・部活動や他大学のインカレサークルを紹介します'
+        smallImage='https://kit-newcomer.3univkyoto.com/images/icons/icon-512x512.png'
       />
       <Container>
         <SectionTitle>クラブ・サークル紹介</SectionTitle>

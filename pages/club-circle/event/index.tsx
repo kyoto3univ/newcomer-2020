@@ -20,6 +20,7 @@ export default ({ events }: Props) => {
       <Ogp
         title='新歓イベント情報'
         description='新歓イベント情報を掲載しています'
+        smallImage='https://kit-newcomer.3univkyoto.com/images/icons/icon-512x512.png'
       />
       <Container>
         <SectionTitle>新歓イベントリスト</SectionTitle>

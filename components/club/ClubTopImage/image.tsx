@@ -34,7 +34,7 @@ export const ClubTopImageImg = ({ imageMeta, image, imageAlt }: Props) => {
     <>
       <LazyImage
         src={`${image}?w=${imageResizeWidth}&fm=jpg&q=85`}
-        alt={imageAlt || ''}
+        alt={imageAlt ?? '画像の説明はありません'}
         initialHeight={imageInitialHeight}
         onClick={openImageViewer}
         effect={'opacity'}
