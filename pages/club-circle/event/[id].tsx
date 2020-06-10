@@ -6,10 +6,9 @@ import styled from 'styled-components';
 import { fetchEvent, fetchEventList } from '../../../api/contentful/event';
 import { ClubImages } from '../../../components/club/ClubImages';
 import { Container } from '../../../components/Container';
+import { Markdown } from '../../../components/Markdown';
 import { Ogp } from '../../../components/Ogp';
-import { PreWrapP } from '../../../components/PreWrapP';
 import { SectionTitle } from '../../../components/SectionTitle';
-import { TextAutoLink } from '../../../components/TextAutoLink';
 import { ExtractPromise } from '../../../utils/return-type';
 
 const Time = styled.time`
@@ -55,9 +54,7 @@ export default ({ eventInfo }: Props) => {
           {eventInfo.title}
         </SectionTitle>
         <Time>{dateTimeString}</Time>
-        <PreWrapP>
-          <TextAutoLink content={eventInfo.content} />
-        </PreWrapP>
+        <Markdown source={eventInfo.content} />
         <ClubImages images={eventInfo.images} />
       </Container>
     </>
