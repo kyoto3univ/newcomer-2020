@@ -18,6 +18,7 @@
     "react-collapse": "^5.0.1",
     "react-dom": "^16.13.1",
     "react-lazy-load-image-component": "^1.4.1",
+    "react-markdown": "^4.3.1",
     "react-select": "^3.1.0",
     "react-youtube": "^7.10.0",
     "styled-components": "^5.0.1",
