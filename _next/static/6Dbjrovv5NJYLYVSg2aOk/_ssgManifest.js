@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002Fclub-circle\u002Fevent","\u002Fclub-circle","\u002Fclub-circle\u002F[id]","\u002Fclub-circle\u002Fevent\u002F[id]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()
